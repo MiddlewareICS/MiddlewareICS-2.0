@@ -1,0 +1,230 @@
+
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+
+<form action="http://localhost:9000/user/register" method="post">
+用户名：<input type="text" name="username" value="" /> 
+密码：<input type="text" name="password" value="" /> 
+邮箱：<input type="text" name="email" value="" />  
+<input type="submit" value="提交" />
+</form>
+
+<input type="button" class="btn" value="test">
+
+
+<p style="border: 1px solid blue; height: 50px" id="p1">repo信息</p>
+<button id="button1">get:repo/info</button>
+
+<p style="border: 1px solid blue;height: 50px" id="p2">用户注册</p>
+<button id="button2">post:user/register</button>
+
+<p style="border: 1px solid blue;height: 50px" id="p3">用户登录</p>
+<button id="button3">post:user/login</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p4">设备添加</p>
+<button id="button4">post:device/add</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p5">设备获得</p>
+<button id="button5">post:device/get</button>
+
+<p style="border: 1px solid blue;height: 200px" id="p6">设备列表</p>
+<button id="button6">post:device/list</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p7">模版列表</p>
+<button id="button7">post:device/template/list</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p8">全局模版列表</p>
+<button id="button8">post:device/template/public/list</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p9">保护规则列表</p>
+<button id="button9">post:guardrule/list</button>
+
+<p style="border: 1px solid blue;height: 100px" id="p10">任务列表</p>
+<button id="button10">post:tasklet/list</button>
+
+
+<script type="text/javascript"> 
+var secretKey;
+
+// 获取repository信息
+$("#button1").click(function(){
+  $.get("http://localhost:9000/repo/info",function(data,status){
+    $('#p1').text("数据: " + JSON.stringify(data) + "\n状态: " + status);
+  });
+});
+
+
+// user注册
+var userRegister={"username": "samy1234", "password": "mypassword", "email": "pandarasamya@iiitd.ac.in"};
+var jsonStr=JSON.stringify(userRegister);
+$("#button2").click(function(){
+	$.post("http://localhost:9000/user/register",
+	    jsonStr,
+	    function(data,status){
+	        $('#p2').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// user登陆
+var logInfo={"username": "samy1234", "password": "mypassword"};
+var jsonStr2=JSON.stringify(logInfo);
+$("#button3").click(function(){
+	$.post("http://localhost:9000/user/login",
+	    jsonStr2,
+	    function(data,status){
+
+			secretKey=data.message;
+	    	console.log(data.message)
+	    	console.log(secretKey)
+	        $('#p3').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+
+// 添加设备
+$("#button4").click(function(){
+	var deviceAdd={
+		"secretkey": secretKey, 
+		"deviceprofile": {
+			"devicename": "device1",
+			"IP": "192.168.0.7", 
+			"location": "PhD Lab", 
+			"tags": "3rd floor; IIIT Delhi", 
+			"latitude": 0, 
+			"longitude": 0, 
+			"sensors": [
+				{
+					"name": "temperature", 
+					"sid": 1,
+					"channels": [
+						{
+							"name": "channel1", 
+							"type": "Double", 
+							"unit": "Celsius",
+							"samplingperiod":1
+						} 
+					]
+				},
+				{
+					"name": "Accelerometer", 
+					"sid": 1,
+					"channels": [
+						{
+							"name": "X", 
+							"type": "Int", 
+							"unit": "None",
+							"samplingperiod":2
+						},
+						{
+							"name": "Y", 
+							"type": "Int", 
+							"unit": "None",
+							"samplingperiod":3
+						},
+						{
+							"name": "Z", 
+							"type": "Int", 
+							"unit": "None",
+							"samplingperiod":4
+						}
+					]
+				}
+			],
+			"actuators": [ 
+				{
+					"name": "actuator2" 
+				}
+			] 
+		}
+	}
+	var deviceStr=JSON.stringify(deviceAdd);
+	$.post("http://localhost:9000/device/add",
+	    deviceStr,
+	    function(data,status){
+	        $('#p4').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+
+// 获取设备
+$("#button5").click(function(){
+	var deviceGet={
+		"secretkey": secretKey, 
+		"devicename": "device1"		
+	}
+	var deviceStr=JSON.stringify(deviceGet);
+	$.post("http://localhost:9000/device/get",
+	    deviceStr,
+	    function(data,status){
+	        $('#p5').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// 设备列表
+$("#button6").click(function(){
+	var deviceList={
+		"secretkey": secretKey, 
+	}
+	var deviceStr=JSON.stringify(deviceList);
+	$.post("http://localhost:9000/device/list",
+	    deviceStr,
+	    function(data,status){
+	        $('#p6').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// 模版列表  No device template found
+$("#button7").click(function(){
+	var deviceTemplateList={
+		"secretkey": secretKey, 
+	}
+	var deviceStr=JSON.stringify(deviceTemplateList);
+	$.post("http://localhost:9000/device/template/list",
+	    deviceStr,
+	    function(data,status){
+	        $('#p7').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// 全局模版列表
+$("#button8").click(function(){
+	var deviceTemplateList={
+		"secretkey": secretKey, 
+	}
+	var deviceStr=JSON.stringify(deviceTemplateList);
+	$.post("http://localhost:9000/device/template/public/list",
+	    deviceStr,
+	    function(data,status){
+	        $('#p8').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// 保护规则列表     bug停止运行
+$("#button9").click(function(){
+	var guardRule={
+		"secretkey": secretKey, 
+	}
+	var guardStr=JSON.stringify(guardRule);
+	$.post("http://localhost:9000/guardrule/list",
+	    guardStr,
+	    function(data,status){
+	        $('#p9').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+// 任务列表
+$("#button10").click(function(){
+	var tasklet={
+		"secretkey": secretKey, 
+	}
+	var taskletStr=JSON.stringify(tasklet);
+	$.post("http://localhost:9000/guardrule/list",
+	    taskletStr,
+	    function(data,status){
+	        $('#p10').text("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+	    });
+})
+
+</script>

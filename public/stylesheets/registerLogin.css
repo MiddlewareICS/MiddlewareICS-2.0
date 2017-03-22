@@ -1,0 +1,45 @@
+html {
+			background: url('/public/images/home-pku.jpg') no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+            font-family: Microsoft YaHei;
+		}
+
+		body {
+			/*padding-top: 20px;*/
+			font-size: 16px;
+			background: transparent !important;
+		}
+
+        .home-contain{
+            padding: 20px;
+            margin-top: 180px;
+            overflow: hidden;
+        }
+        .panel {
+			background-color: rgba(255, 255, 255, 0.9);
+		}
+
+		h1 {
+			font-weight: 400;
+			font-size: 40px;
+		}
+
+        form{
+            width:40%;
+            margin-top: 5%;
+            margin-left: 30%;
+        }
+        .email,.password{
+            width: 100%;
+        }
+        
+        .login{
+            float: right;
+        }
+        .login,.register{
+            width: 40%;
+            text-align: center;
+        }

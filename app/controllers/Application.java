@@ -77,7 +77,8 @@ public class Application extends Controller {
 	}
 	
 	public static void index() {		
-		renderText("Welcome to SensorAct!");
+		// renderText("Welcome to SensorAct!");
+		render();
 	}
 
 	// Repo information

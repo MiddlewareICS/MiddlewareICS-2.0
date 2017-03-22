@@ -1,4 +1,100 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+ <!--#{welcome /} -->
+
+
+<div class="container">
+	<row>
+		<div class="home-contain col-md-6 col-md-offset-3 panel panel-default">
+
+			<h1 class="text-center">The IoT Middleware of ICS</h1>
+
+			<p class="brief text-center">
+				Someone told me long ago there's a calm before the storm. I know, It's been comin for some time.<br>
+				When it's over, so they say, it'll rain a sunny day. I know,	Shinin down like water.<br> I want to know, have you ever seen the rain?
+			</p>
+
+			<form class="register-login">
+					<input type="text" class="username form-control input-lg" name="username" placeholder="username" />
+					<p class="help-block "><small>请输入用户名（不少于8个字符）</small></p>
+					<input type="text" class="email form-control input-lg" name="email" placeholder="example@ics.pku.edu.cn" />
+					<p class="help-block "><small>请输入邮箱（不少于8个字符）</small></p>
+					<input type="password" class="password form-control input-lg" name="password"  />
+					<p class="help-block "><small>请输入密码（不少于8个字符）</small></p>
+					
+					<input type="button" class="login btn btn-success btn-lg" value="Login">
+					<input type="button" class="register btn btn-info btn-lg" value="Register">
+			</form>
+
+		</div><!-- //main content -->
+	</row><!-- //row -->
+</div> <!-- //container -->
+
+<main>
+	
+</main>
+
+
+
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<!-- <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
+ 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<!-- <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<!-- 
+<script>	
+	$(".register").click(function(){
+		var json = new Object();
+		json.username = $('.username').val();
+		json.email = $('.email').val();
+		json.password = $('.password').val();
+		var jsonStr = JSON.stringify(json);
+
+		$.post("http://localhost:9000/user/register",
+			jsonStr,
+			function(data,status){
+	        console.log("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+			if(data.statuscode == 0){
+				alert('注册成功！');
+				// window.location.href = 'http://demo.cssmoban.com/cssthemes3/mstp_115_enonadmin/dashboard-1.html';
+				window.location.href = "http://localhost:9000/home";
+				$('.container').hide(1000,function(){
+					$('.home').show();
+				})
+			}
+			else{
+				alert('注册失败！');				
+			}
+				
+	    });
+	});
+	$(".login").click(function(){
+		var json = new Object();
+		json.username = $('.username').val();
+		// loginJson.email = $('.email').val();
+		json.password = $('.password').val();
+		var jsonStr = JSON.stringify(json);
+
+		$.post("http://localhost:9000/user/login",
+	    jsonStr,
+	    function(data,status){
+			var secretKey=data.message;
+	        console.log("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+			if(data.statuscode == 0){
+				alert('登陆成功！')
+				$('.container').hide(1000,function(){
+					$('.home').show();
+				})
+			}
+				
+			else	
+				alert('登录失败！')
+	    });
+	})
+</script> -->
+
+
