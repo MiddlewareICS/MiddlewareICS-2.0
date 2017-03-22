@@ -1371,8 +1371,11 @@
 					deviceStr,
 					function(data,status){
 
-						if(data.statuscode && data.statuscode!==0)
-							alert('搜索失败:'+data);
+						if(data.statuscode && data.statuscode!==0){
+							alert('搜索失败:'+data.message);
+							$(".search-return").html('');
+						}
+							
 						else{
 							var result = '';
 							result = result +'devicename:'+ data.devicename +'<br>'+'IP:'+data.IP+'<br>'+'location:'+data.location+'<br>'+'latitude:'+data.latitude+'<br>'+'longitude:'+data.longitude+'<br>'+'tags:'+data.tags+'<br>'+'actuators:'+data.actuators[0].name+'<br>';
