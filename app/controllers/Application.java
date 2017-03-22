@@ -81,6 +81,23 @@ public class Application extends Controller {
 		render();
 	}
 
+	// test
+	public static void home	() {
+		render();
+	}
+	public static void users () {
+		render();
+	}
+	public static void devices () {
+		render();
+	}
+	public static void api () {
+		render();
+	}
+	public static void dashboard() {
+		render();
+	}
+
 	// Repo information
 	public static void repoInfo() {
 		SensorActAPI.repoInfo.doProcess();
