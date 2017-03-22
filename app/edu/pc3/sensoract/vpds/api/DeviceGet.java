@@ -111,22 +111,22 @@ public class DeviceGet extends SensorActAPI {
 			String username = null;
 			if (userProfile.isRegisteredSecretkey(deviceGetRequest.secretkey)) {
 				username = userProfile.getUsername(deviceGetRequest.secretkey);
-				
 			}
 			else if (shareProfile.isAccessKeyExists(deviceGetRequest.secretkey)) {
-				username = shareProfile.getUsername(deviceGetRequest.secretkey);
-				
+				username = shareProfile.getUsername(deviceGetRequest.secretkey);				
 			}
 			if (null == username) {
 				response.sendFailure(Const.API_DEVICE_ACTUATE,
 						ErrorType.UNREGISTERED_SECRETKEY, deviceGetRequest.secretkey);
 			}
 			
-			String secretkey = userProfile.getSecretkey(userProfile.getOwnername());
-			System.out.println("Owner Secretkey" + secretkey);
+			// String secretkey = userProfile.getSecretkey(userProfile.getOwnername());//问题应该就在这里，这里是按照owner的信息去搜的
+			String secretkey = deviceGetRequest.secretkey;
+			System.out.println("User Secretkey: " + secretkey);
 
 			DeviceProfileFormat oneDevice = deviceProfile.getDevice(
 					secretkey, deviceGetRequest.devicename);
+
 			if (null == oneDevice) {
 				response.sendFailure(Const.API_DEVICE_GET,
 						ErrorType.DEVICE_NOTFOUND, deviceGetRequest.devicename);

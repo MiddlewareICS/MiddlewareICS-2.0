@@ -1365,24 +1365,25 @@
 					"secretkey": sessionStorage.getItem('secretKey'), 
 					"devicename": $('.device-search').val()		
 				}
+				
 				var deviceStr=JSON.stringify(deviceGet);
 				$.post("http://localhost:9000/device/get",
 					deviceStr,
 					function(data,status){
-						if(data.statuscode === 0){
-							alert('添加成功');
+
+						if(data.statuscode && data.statuscode!==0)
+							alert('搜索失败:'+data);
+						else{
 							var result = '';
 							result = result +'devicename:'+ data.devicename +'<br>'+'IP:'+data.IP+'<br>'+'location:'+data.location+'<br>'+'latitude:'+data.latitude+'<br>'+'longitude:'+data.longitude+'<br>'+'tags:'+data.tags+'<br>'+'actuators:'+data.actuators[0].name+'<br>';
 							for(var j =0; j < data.sensors.length; j++){
 								result = result +'sensor:'+'<br>' + 'name:' + data.sensors[j].name+'<br>'+'sid:'+data.sensors[j].sid+'<br>';
 							}
 							result += '<br>';
-							$(".search-return").append(result);
+							$(".search-return").html(result);
 						}
-						else
-							alert('添加失败:'+data.message);
 
-						// console.log("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
+						console.log("数据: \n" + JSON.stringify(data) + "\n状态: " + status);
 						
 					});
 			})
