@@ -1,0 +1,11 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+tmp/
+logs/
+precompiled/
+eclipse/
+
