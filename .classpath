@@ -112,6 +112,6 @@
 	<classpathentry kind="lib" path="lib/ifxjdbcx.jar"/>
 	<classpathentry kind="lib" path="lib/fscontext.jar"/>
 	<classpathentry kind="lib" path="lib/providerutil.jar"/>
-	<classpathentry kind="lib" path="lib/jython.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.paho.client.mqttv3-1.0.1.jar"/>
 	<classpathentry kind="output" path="eclipse/classes"/>
 </classpath>
