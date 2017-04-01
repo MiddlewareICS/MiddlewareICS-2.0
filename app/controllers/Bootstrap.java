@@ -266,7 +266,7 @@ public class Bootstrap extends Job {
 		mqttSub client = new mqttSub();  
         client.start();
         
-        System.out.println("aaaaaaa");
+//        System.out.println("aaaa");
 
 		// Play.configuration.list(System.out);
 
