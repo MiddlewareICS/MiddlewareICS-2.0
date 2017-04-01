@@ -35,6 +35,14 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 import com.mongodb.*;
 
 
+//为设备信息插入数据库而引入
+import java.util.HashMap;
+import java.util.Map;
+import play.mvc.Before;
+import play.mvc.Controller;
+import edu.pc3.sensoract.vpds.api.SensorActAPI;
+import edu.pc3.sensoract.vpds.api.request.TaskletAddFormat;
+
 /**
  * @author samy
  * 
@@ -169,7 +177,7 @@ public class Bootstrap extends Job {
 	public class mqttSub {  
 		  
 	    public static final String HOST = "tcp://localhost:1883";  
-	    public static final String TOPIC = "SB";  
+	    public static final String TOPIC = "ICS";  
 	    private MqttClient client;  
 	    private MqttConnectOptions options;  
 	    
@@ -221,8 +229,11 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));  
 		        
 		        
+//		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
+//				System.out.println(new String(message.getPayload()));
 		        
 		      //数据库
+				
 		        try{	        	
 		        	Mongo mongo = new Mongo("127.0.0.1",27017);  
 		            DB db =mongo.getDB("study"); 
@@ -240,18 +251,19 @@ public class Bootstrap extends Job {
 		            users.insert(user);  
 		            
 		            // 从集合中查询数据，我们就查询一条，调用findOne即可  
-		            DBObject dbUser = users.findOne();  
-		            System.out.println("插入数据库：");
-		            System.out.println("name" + " : "  + dbUser.get("name") );  
-		            System.out.println("age" + " : "  + dbUser.get("age") );  
-		            DBObject dbAddress = (DBObject)user.get("address");  
-		            System.out.println("city" + " : "  + dbAddress.get("city") );  
-		            System.out.println("street" + " : "  + dbAddress.get("street") );  
-		            System.out.println("mail" + " : "  + dbAddress.get("mail") );  
+//		            DBObject dbUser = users.findOne();  
+//		            System.out.println("插入数据库：");
+//		            System.out.println("name" + " : "  + dbUser.get("name") );  
+//		            System.out.println("age" + " : "  + dbUser.get("age") );  
+//		            DBObject dbAddress = (DBObject)user.get("address");  
+//		            System.out.println("city" + " : "  + dbAddress.get("city") );  
+//		            System.out.println("street" + " : "  + dbAddress.get("street") );  
+//		            System.out.println("mail" + " : "  + dbAddress.get("mail") );  
 		            
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
 		        }
+		        
 		    }   
 	    } 
 	    
