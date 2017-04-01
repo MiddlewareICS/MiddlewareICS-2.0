@@ -169,7 +169,7 @@ public class Bootstrap extends Job {
 	public class mqttSub {  
 		  
 	    public static final String HOST = "tcp://localhost:1883";  
-	    public static final String TOPIC = "TEST";  
+	    public static final String TOPIC = "SB";  
 	    private MqttClient client;  
 	    private MqttConnectOptions options;  
 	    
