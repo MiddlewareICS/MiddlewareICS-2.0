@@ -140,6 +140,7 @@ public class Application extends Controller {
 	// Device profile management
 	public static void deviceAdd() {
 		System.out.println("---here is Application - deviceAdd");
+		System.out.println(request.params.get("body").getClass().toString());
 		System.out.println(request.params.get("body"));
 		SensorActAPI.deviceAdd.doProcess(request.params.get("body"));
 		

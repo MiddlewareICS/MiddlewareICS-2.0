@@ -194,12 +194,12 @@ public class Bootstrap extends Job {
 	            
 	            MqttTopic topic = client.getTopic(TOPIC);  
 	            //setWill方法，如果项目中需要知道客户端是否掉线可以调用该方法。设置最终端口的通知消息  
-	            options.setWill(topic, "close".getBytes(), 2, true);  
+//	            options.setWill(topic, "close".getBytes(), 2, true);  
 	  
 	            client.connect(options);  
 	            
 	            //订阅消息  
-	            int[] Qos  = {1};  
+	            int[] Qos  = {0};  
 	            String[] topic1 = {TOPIC}; 
 	            
 	        	client.subscribe(topic1, Qos);
@@ -226,7 +226,8 @@ public class Bootstrap extends Job {
 		        // subscribe后得到的消息会执行到这里面  
 		        System.out.println("接收消息主题 : " + topic);  
 		        System.out.println("接收消息Qos : " + message.getQos());  
-		        System.out.println("接收消息内容 : " + new String(message.getPayload()));  
+		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
+//		        System.out.println("接收消息内容 : " + message.getPayload());
 		        
 		        System.out.println("---自动添加设备信息");
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
