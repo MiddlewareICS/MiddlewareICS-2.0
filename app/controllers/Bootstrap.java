@@ -228,12 +228,12 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息Qos : " + message.getQos());  
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));  
 		        
-		        
-//		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
+		        System.out.println("---自动添加设备信息");
+		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
 //				System.out.println(new String(message.getPayload()));
 		        
 		      //数据库
-				
+				/*
 		        try{	        	
 		        	Mongo mongo = new Mongo("127.0.0.1",27017);  
 		            DB db =mongo.getDB("study"); 
@@ -263,6 +263,7 @@ public class Bootstrap extends Job {
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
 		        }
+		        */
 		        
 		    }   
 	    } 

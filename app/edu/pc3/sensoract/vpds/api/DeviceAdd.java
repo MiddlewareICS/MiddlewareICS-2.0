@@ -228,6 +228,7 @@ public class DeviceAdd extends SensorActAPI {
 	public void doProcess(final String deviceAddJson) {
 
 		try {
+			System.out.println("---here is DeviceAdd");
 			DeviceAddFormat newDevice = convertToRequestFormat(deviceAddJson,
 					DeviceAddFormat.class);
 
@@ -244,6 +245,7 @@ public class DeviceAdd extends SensorActAPI {
 						newDevice.deviceprofile.devicename);
 			}
 			deviceProfile.addDevice(newDevice);
+			System.out.println("---success DeviceAdd");
 			response.SendSuccess(Const.API_DEVICE_ADD, Const.DEVICE_ADDED,
 					newDevice.deviceprofile.devicename);
 
