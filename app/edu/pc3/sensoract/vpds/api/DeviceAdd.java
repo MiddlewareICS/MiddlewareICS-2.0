@@ -166,15 +166,11 @@ public class DeviceAdd extends SensorActAPI {
 	 */
 	protected void validateRequest(final DeviceAddFormat newDevice,
 			final String apiname) {
-System.out.println("mmmmmmmmmmmmm");
 		validator.validateSecretKey(newDevice.secretkey);
-System.out.println("aaaaaaaaaa");
 		if (null == newDevice.deviceprofile) {
-System.out.println("bbbbbbbbbb");
 			validator.addError(Const.PARAM_DEVICEPROFILE,
 					Const.PARAM_DEVICEPROFILE + Const.MSG_REQUIRED);
 		} else {
-System.out.println("ccccccccccc");
 			DeviceFormat deviceProfile = newDevice.deviceprofile;
 			List sensors = deviceProfile.sensors;
 			List actuators = deviceProfile.actuators;
@@ -185,7 +181,6 @@ System.out.println("ccccccccccc");
 			if(Const.API_DEVICE_TEMPLATE_ADD.equalsIgnoreCase(apiname)) {
 				validator.validateDeviceProfileTemplateName(deviceProfile.templatename);	
 			}			
-			System.out.println("dddddddddddddd");
 			validator.validateDeviceProfileLocation(deviceProfile.location);
 			validator.validateDeviceProfileTags(deviceProfile.tags);
 			validator.validateDeviceProfileLatitude(deviceProfile.latitude);
@@ -196,7 +191,6 @@ System.out.println("ccccccccccc");
 			}
 
 			if (null == sensors && null == actuators) {
-				System.out.println("eeeeeeeeeeeeeee");
 				validator.addError(Const.PARAM_DEVICEPROFILE,
 						Const.PARAM_DEVICEPROFILE + "." + Const.PARAM_SENSORS
 								+ " or " + Const.PARAM_DEVICEPROFILE + "."
@@ -230,13 +224,11 @@ System.out.println("ccccccccccc");
 	public void doProcess(final String deviceAddJson) {
 
 		try {
-			System.out.println("---here is DeviceAdd\n---the device content:");
+			System.out.println("---here is DeviceAdd and the device content:");
 			System.out.println(deviceAddJson);
 			DeviceAddFormat newDevice = convertToRequestFormat(deviceAddJson,
 					DeviceAddFormat.class);
-System.out.println("111111111111");
-			validateRequest(newDevice, Const.API_DEVICE_ADD);
-System.out.println("22222222222");
+//			validateRequest(newDevice, Const.API_DEVICE_ADD);
 			if (!userProfile.isRegisteredSecretkey(newDevice.secretkey)) {
 				response.sendFailure(Const.API_DEVICE_ADD,
 						ErrorType.UNREGISTERED_SECRETKEY, newDevice.secretkey);

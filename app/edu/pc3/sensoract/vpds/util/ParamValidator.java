@@ -68,11 +68,13 @@ public class ParamValidator extends SensorActAPI {
 	 */
 	protected void validateString(final String string, final String name,
 			final int minSize, final int maxSize) {
+		System.out.println("here is validateString --in");
 		validation.required(string).message(name + Const.MSG_REQUIRED);
 		validation.minSize(string, minSize).message(
 				name + Const.MSG_MIN_LENGTH + minSize);
 		validation.maxSize(string, maxSize).message(
 				name + Const.MSG_MAX_LENGTH + maxSize);
+		System.out.println("here is validateString --out");
 	}
 
 	/**
@@ -182,8 +184,10 @@ public class ParamValidator extends SensorActAPI {
 	 *            Secret key to validate
 	 */
 	public void validateSecretKey(final String secretkey) {
+		System.out.println("here is validateSecretKey --in");
 		validateString(secretkey, Const.PARAM_SECRETKEY,
 				Const.SECRETKEY_MIN_LENGTH, Const.SECRETKEY_MAX_LENGTH);
+		System.out.println("here is validateSecretKey --out");
 	}
 
 	/**

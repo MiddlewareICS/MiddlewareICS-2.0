@@ -229,7 +229,6 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
 //		        System.out.println("接收消息内容 : " + message.getPayload());
 		        
-		        System.out.println("---自动添加设备信息");
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
 //				System.out.println(new String(message.getPayload()));
 		        
