@@ -241,8 +241,8 @@ public class DeviceAdd extends SensorActAPI {
 			}
 			deviceProfile.addDevice(newDevice);
 			System.out.println("---success DeviceAdd");
-			response.SendSuccess(Const.API_DEVICE_ADD, Const.DEVICE_ADDED,
-					newDevice.deviceprofile.devicename);
+//			response.SendSuccess(Const.API_DEVICE_ADD, Const.DEVICE_ADDED,
+//					newDevice.deviceprofile.devicename);
 
 		} catch (InvalidJsonException e) {
 			response.sendFailure(Const.API_DEVICE_ADD, ErrorType.INVALID_JSON,
