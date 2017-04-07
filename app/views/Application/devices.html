@@ -1343,11 +1343,12 @@
 							var devicelistArr = data.devicelist;
 							var result = '';
 							for(var i = 0; i < devicelistArr.length; i++){
-								result = result +'devicename:'+ devicelistArr[i].devicename +'<br>'+'IP:'+devicelistArr[i].IP+'<br>'+'location:'+devicelistArr[i].location+'<br>'+'latitude:'+devicelistArr[i].latitude+'<br>'+'longitude:'+devicelistArr[i].longitude+'<br>'+'tags:'+devicelistArr[i].tags+'<br>'+'actuators:'+devicelistArr[i].actuators[0].name+'<br>';
-								for(var j =0; j < devicelistArr[i].sensors.length; j++){
-									result = result +'sensor:'+'<br>' + 'name:' + devicelistArr[i].sensors[j].name+'<br>'+'sid:'+devicelistArr[i].sensors[j].sid+'<br>';
-								}
-								result += '<br>';
+								// result = result +'devicename:'+ devicelistArr[i].devicename +'<br>'+'IP:'+devicelistArr[i].IP+'<br>'+'location:'+devicelistArr[i].location+'<br>'+'latitude:'+devicelistArr[i].latitude+'<br>'+'longitude:'+devicelistArr[i].longitude+'<br>'+'tags:'+devicelistArr[i].tags+'<br>'+'actuators:'+devicelistArr[i].actuators[0].name+'<br>';
+								// for(var j =0; j < devicelistArr[i].sensors.length; j++){
+								// 	result = result +'sensor:'+'<br>' + 'name:' + devicelistArr[i].sensors[j].name+'<br>'+'sid:'+devicelistArr[i].sensors[j].sid+'<br>';
+								// }
+								
+								result += devicelistArr[i].devicename+'<br>';
 							}
 							$(".device-list-info").html(result);
 						}
