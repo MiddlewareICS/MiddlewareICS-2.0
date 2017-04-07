@@ -202,6 +202,7 @@ public class Bootstrap extends Job {
 	            int[] Qos  = {0};  
 	            String[] topic1 = {TOPIC}; 
 	            
+	            //订阅
 	        	client.subscribe(topic1, Qos);
 	                
 	        } catch (Exception e) {  
@@ -227,43 +228,10 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息主题 : " + topic);  
 		        System.out.println("接收消息Qos : " + message.getQos());  
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
-//		        System.out.println("接收消息内容 : " + message.getPayload());
 		        
+		        //添加设备
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
-//				System.out.println(new String(message.getPayload()));
-		        
-		      //数据库
-				/*
-		        try{	        	
-		        	Mongo mongo = new Mongo("127.0.0.1",27017);  
-		            DB db =mongo.getDB("study"); 
-		            DBCollection users = db.getCollection("person");
-		            
-		            DBObject user = new BasicDBObject();  
-		            user.put("name", "jimmy");  
-		            user.put("age", "34");  
-		            DBObject address = new BasicDBObject();  
-		            address.put("city", "bj");  
-		            address.put("street", "bq road");  
-		            address.put("mail", "ufpark 68#");   
-		            user.put("address", address);  
-	  
-		            users.insert(user);  
-		            
-		            // 从集合中查询数据，我们就查询一条，调用findOne即可  
-//		            DBObject dbUser = users.findOne();  
-//		            System.out.println("插入数据库：");
-//		            System.out.println("name" + " : "  + dbUser.get("name") );  
-//		            System.out.println("age" + " : "  + dbUser.get("age") );  
-//		            DBObject dbAddress = (DBObject)user.get("address");  
-//		            System.out.println("city" + " : "  + dbAddress.get("city") );  
-//		            System.out.println("street" + " : "  + dbAddress.get("street") );  
-//		            System.out.println("mail" + " : "  + dbAddress.get("mail") );  
-		            
-		        }catch(Exception e){
-		        	System.out.println("DB error"); 
-		        }
-		        */
+
 		        
 		    }   
 	    } 
@@ -279,7 +247,6 @@ public class Bootstrap extends Job {
 		mqttSub client = new mqttSub();  
         client.start();
         
-//        System.out.println("aaaa");
 
 		// Play.configuration.list(System.out);
 
