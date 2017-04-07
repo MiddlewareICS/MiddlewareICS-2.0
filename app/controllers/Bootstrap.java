@@ -285,13 +285,12 @@ class AppleListener implements UpdateListener
         if (newEvents != null)  
         {  
             Double avg = (Double) newEvents[0].get("avg(price)");  
-            System.out.println("Apple's average price is " + avg);  
+            System.out.println("Average temperature of ICS is " + avg);  
         }  
     }  
   
 }  
-
-    
+ 
 	
 	
 	public void doJob() {
