@@ -22,7 +22,7 @@ import edu.pc3.sensoract.vpds.constants.Const;
 import edu.pc3.sensoract.vpds.model.UserProfileModel;
 
 
-
+//mqtt
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;  
@@ -42,6 +42,17 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import edu.pc3.sensoract.vpds.api.SensorActAPI;
 import edu.pc3.sensoract.vpds.api.request.TaskletAddFormat;
+
+//Esper
+import com.espertech.esper.client.EPAdministrator;  
+import com.espertech.esper.client.EPRuntime;  
+import com.espertech.esper.client.EPServiceProvider;  
+import com.espertech.esper.client.EPServiceProviderManager;  
+import com.espertech.esper.client.EPStatement;  
+import com.espertech.esper.client.EventBean;  
+import com.espertech.esper.client.UpdateListener;  
+  
+
 
 /**
  * @author samy
@@ -238,6 +249,51 @@ public class Bootstrap extends Job {
 	    
 	}  
 	
+	
+//	Esper
+  class Apple  
+{  
+    private int id;  
+    private int price;  
+  
+    public int getId()  
+    {  
+        return id;  
+    }  
+  
+    public void setId(int id)  
+    {  
+        this.id = id;  
+    }  
+  
+    public int getPrice()  
+    {  
+        return price;  
+    }  
+  
+    public void setPrice(int price)  
+    {  
+        this.price = price;  
+    }  
+}  
+  
+class AppleListener implements UpdateListener  
+{  
+  
+    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
+    {  
+        if (newEvents != null)  
+        {  
+            Double avg = (Double) newEvents[0].get("avg(price)");  
+            System.out.println("Apple's average price is " + avg);  
+        }  
+    }  
+  
+}  
+
+    
+	
+	
 	public void doJob() {
 
 		getOwnerConfiguration();
@@ -247,6 +303,34 @@ public class Bootstrap extends Job {
 		mqttSub client = new mqttSub();  
         client.start();
         
+        
+//        Esper
+        EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
+        
+        EPAdministrator admin = epService.getEPAdministrator();  
+  
+        String product = Apple.class.getName();  
+        String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
+  
+        EPStatement state = admin.createEPL(epl);  
+        state.addListener(new AppleListener());  
+  
+        EPRuntime runtime = epService.getEPRuntime();  
+  
+        Apple apple1 = new Apple();  
+        apple1.setId(1);  
+        apple1.setPrice(5);  
+        runtime.sendEvent(apple1);  
+  
+        Apple apple2 = new Apple();  
+        apple2.setId(2);  
+        apple2.setPrice(2);  
+        runtime.sendEvent(apple2);  
+  
+        Apple apple3 = new Apple();  
+        apple3.setId(3);  
+        apple3.setPrice(5);  
+        runtime.sendEvent(apple3);  
 
 		// Play.configuration.list(System.out);
 
