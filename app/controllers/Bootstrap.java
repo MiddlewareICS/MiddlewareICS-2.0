@@ -240,6 +240,9 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息Qos : " + message.getQos());  
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
 		        
+		        //Esper
+		        myEsper();
+		        
 		        //添加设备
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
 
@@ -251,7 +254,7 @@ public class Bootstrap extends Job {
 	
 	
 //	Esper
-	class Apple  
+	public class Apple  
 	{  
 	    private int id;  
 	    private int price;  
@@ -277,7 +280,7 @@ public class Bootstrap extends Job {
 	    }  
 	}  
   
-  	class AppleListener implements UpdateListener  
+	public class AppleListener implements UpdateListener  
 	{  
 	  
 	    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
@@ -285,7 +288,7 @@ public class Bootstrap extends Job {
 	        if (newEvents != null)  
 	        {  
 	            Double avg = (Double) newEvents[0].get("avg(price)");  
-	            System.out.println("Average temperature of ICS is " + avg);  
+	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
 	        }  
 	    }  
 	  
@@ -330,7 +333,7 @@ public class Bootstrap extends Job {
         client.start();
         
 //      Esper
-        myEsper();
+//        myEsper();
 
 		// Play.configuration.list(System.out);
 
