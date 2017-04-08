@@ -228,6 +228,8 @@ public class DeviceAdd extends SensorActAPI {
 			System.out.println(deviceAddJson);
 			DeviceAddFormat newDevice = convertToRequestFormat(deviceAddJson,
 					DeviceAddFormat.class);
+			
+//			验证http请求的有效性，因为使用mqtt故删除
 //			validateRequest(newDevice, Const.API_DEVICE_ADD);
 			if (!userProfile.isRegisteredSecretkey(newDevice.secretkey)) {
 				response.sendFailure(Const.API_DEVICE_ADD,
@@ -241,6 +243,8 @@ public class DeviceAdd extends SensorActAPI {
 			}
 			deviceProfile.addDevice(newDevice);
 			System.out.println("---success DeviceAdd");
+			
+//			响应http请求
 //			response.SendSuccess(Const.API_DEVICE_ADD, Const.DEVICE_ADDED,
 //					newDevice.deviceprofile.devicename);
 
