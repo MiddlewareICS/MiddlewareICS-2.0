@@ -241,7 +241,21 @@ public class Bootstrap extends Job {
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
 		        
 		        //Esper
-		        myEsper();
+//		        myEsper();
+		        Apple apple1 = new Apple();  
+		        apple1.setId(1);  
+		        apple1.setPrice(5);  
+		        runtime.sendEvent(apple1);  
+
+		        Apple apple2 = new Apple();  
+		        apple2.setId(2);  
+		        apple2.setPrice(2);  
+		        runtime.sendEvent(apple2);  
+
+		        Apple apple3 = new Apple();  
+		        apple3.setId(3);  
+		        apple3.setPrice(5);  
+		        runtime.sendEvent(apple3);  
 		        
 		        //添加设备
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
@@ -294,40 +308,55 @@ public class Bootstrap extends Job {
 	  
 	}  
  
-  	public void myEsper(){
-  	  EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
-      
-      EPAdministrator admin = epService.getEPAdministrator();  
+	EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
+    
+    EPAdministrator admin = epService.getEPAdministrator();  
 
-      String product = Apple.class.getName();  
-      String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
+    String product = Apple.class.getName();  
+    String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
 
-      EPStatement state = admin.createEPL(epl);  
-      state.addListener(new AppleListener());  
+    EPStatement state = admin.createEPL(epl);  
+//    state.addListener(new AppleListener());  
 
-      EPRuntime runtime = epService.getEPRuntime();  
+    EPRuntime runtime = epService.getEPRuntime();  
+	
+//  	public void myEsper(){
+//  	  EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
+//      
+//      EPAdministrator admin = epService.getEPAdministrator();  
+//
+//      String product = Apple.class.getName();  
+//      String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
+//
+//      EPStatement state = admin.createEPL(epl);  
+//      state.addListener(new AppleListener());  
+//
+//      EPRuntime runtime = epService.getEPRuntime();  
 
-      Apple apple1 = new Apple();  
-      apple1.setId(1);  
-      apple1.setPrice(5);  
-      runtime.sendEvent(apple1);  
-
-      Apple apple2 = new Apple();  
-      apple2.setId(2);  
-      apple2.setPrice(2);  
-      runtime.sendEvent(apple2);  
-
-      Apple apple3 = new Apple();  
-      apple3.setId(3);  
-      apple3.setPrice(5);  
-      runtime.sendEvent(apple3);  
-  	}
+//      Apple apple1 = new Apple();  
+//      apple1.setId(1);  
+//      apple1.setPrice(5);  
+//      runtime.sendEvent(apple1);  
+//
+//      Apple apple2 = new Apple();  
+//      apple2.setId(2);  
+//      apple2.setPrice(2);  
+//      runtime.sendEvent(apple2);  
+//
+//      Apple apple3 = new Apple();  
+//      apple3.setId(3);  
+//      apple3.setPrice(5);  
+//      runtime.sendEvent(apple3);  
+//  	}
 	
 	public void doJob() {
 
 		getOwnerConfiguration();
 		verifyOwnerKeys();
 		addOwnerProfile();
+		
+		//esper
+		state.addListener(new AppleListener()); 
 		
 		mqttSub client = new mqttSub();  
         client.start();
