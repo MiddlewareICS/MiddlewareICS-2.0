@@ -308,17 +308,17 @@ public class Bootstrap extends Job {
 	  
 	}  
  
-	EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
+	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
     
-    EPAdministrator admin = epService.getEPAdministrator();  
+	public EPAdministrator admin = epService.getEPAdministrator();  
 
-    String product = Apple.class.getName();  
-    String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
+	public String product = Apple.class.getName();  
+	public String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
 
-    EPStatement state = admin.createEPL(epl);  
+	public EPStatement state = admin.createEPL(epl);  
 //    state.addListener(new AppleListener());  
 
-    EPRuntime runtime = epService.getEPRuntime();  
+	public EPRuntime runtime = epService.getEPRuntime();  
 	
 //  	public void myEsper(){
 //  	  EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
