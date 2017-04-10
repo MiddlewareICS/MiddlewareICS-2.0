@@ -308,46 +308,13 @@ public class Bootstrap extends Job {
 	  
 	}  
  
-	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
-    
+	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
 	public EPAdministrator admin = epService.getEPAdministrator();  
-
 	public String product = Apple.class.getName();  
 	public String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
-
 	public EPStatement state = admin.createEPL(epl);  
-//    state.addListener(new AppleListener());  
-
 	public EPRuntime runtime = epService.getEPRuntime();  
 	
-//  	public void myEsper(){
-//  	  EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();  
-//      
-//      EPAdministrator admin = epService.getEPAdministrator();  
-//
-//      String product = Apple.class.getName();  
-//      String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
-//
-//      EPStatement state = admin.createEPL(epl);  
-//      state.addListener(new AppleListener());  
-//
-//      EPRuntime runtime = epService.getEPRuntime();  
-
-//      Apple apple1 = new Apple();  
-//      apple1.setId(1);  
-//      apple1.setPrice(5);  
-//      runtime.sendEvent(apple1);  
-//
-//      Apple apple2 = new Apple();  
-//      apple2.setId(2);  
-//      apple2.setPrice(2);  
-//      runtime.sendEvent(apple2);  
-//
-//      Apple apple3 = new Apple();  
-//      apple3.setId(3);  
-//      apple3.setPrice(5);  
-//      runtime.sendEvent(apple3);  
-//  	}
 	
 	public void doJob() {
 
@@ -360,9 +327,6 @@ public class Bootstrap extends Job {
 		
 		mqttSub client = new mqttSub();  
         client.start();
-        
-//      Esper
-//        myEsper();
 
 		// Play.configuration.list(System.out);
 
