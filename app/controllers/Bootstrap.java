@@ -363,40 +363,11 @@ public class Bootstrap extends Job {
 	            return null;   
 	        }   
 	    }   
-	  
-	  
+	    
 	    public Scriptable getScope()   
 	    {   
 	        return scope;   
 	    }   
-	 
-	    /*
-//	    个人将scope理解为js的全局
-//	    public static void main(String[] args)   
-//	    {   
-//	    	JSExploration jsExploration = new JSExploration();
-//	    	
-//	        String filename = System.getProperty("user.dir") + "/src/jscode/jsmap.js"; 
-////	      运行
-//	        Object result = jsExploration.runJavaScript(filename);   
-//	        
-//	        Scriptable scope = jsExploration.getScope();   
-//	        Scriptable obj = (Scriptable) scope.get("obj", scope);   
-//	        System.out.println("obj.a == " + obj.get("a", obj));   
-//	        Scriptable b = (Scriptable) obj.get("b", obj);   
-//	        System.out.println("b[0] == " + b.get(0, b));   
-//	        Boolean flag = (Boolean) scope.get("flag", scope);   
-//	        System.out.println(flag);   
-//	  
-//	        Scriptable myobj = (Scriptable) scope.get("obj", scope);   
-//	        Boolean myflag = (Boolean) scope.get("flag", scope);   
-//	        System.out.println(myflag);   
-//	  
-//	        Scriptable jsFunction = (Scriptable) scope.get("jsFunction", scope);   
-//	        Function fc = (Function) jsFunction.get("handler", jsFunction);   
-//	        Object isPrime = fc.call(Context.getCurrentContext(), jsFunction, fc, new Object[] { "this is my test" });   
-//	    }  
-		*/
 	} 
 	
 	public void doJob() {
