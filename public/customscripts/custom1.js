@@ -6,12 +6,14 @@ next = isPrime
 flag = isPrime(5)  
 
 with (swingNames) {   
- System.out.println("Here is custom1 javascript");  
- System.out.println("The result of cunstom javascript function, isPrime(5), is: "+ flag); 
-// while(true){
-//	 System.out.println("Here is circle of 5s");
-//	 sleep(1000);
-// }
+ System.out.println("\n###   Here is custom1.js   ###\n");  
+ System.out.println("\n###   The result of cunstom javascript function, isPrime(5), is: "+ flag +"   ###\n"); 
+ var i=0;
+ while(i<10){
+	 System.out.println("\n###   The Temperature of my room is 25 'C   ###\n");
+	 sleep(1000);
+	 i++;
+ }
 // var circle = setTimeout( function(){ System.out.println("Here is circle of 5s");},5000);  不能运行
 // console.log('here is console.log');  不能运行
 }    
