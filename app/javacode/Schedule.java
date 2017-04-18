@@ -15,18 +15,18 @@ import org.quartz.impl.triggers.SimpleTriggerImpl;
 
 public class Schedule {
 	
-	public  String path = "./scripts/test.py";
+	public  String testpath =  System.getProperty("user.dir") + "/public/customscripts/custom1.js";
+	public  String MQTTsubpath =  System.getProperty("user.dir") + "/public/customscripts/MQTTsub.js";
 
-//	public static void main(String[] args) throws SchedulerException {
 	public  void doSchedule() throws SchedulerException{
 //		调度定义
 		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 		Scheduler scheduler = schedulerFactory.getScheduler();
 
 //		任务  ScriptExecute
-		JobDetail jobDetail = JobBuilder.newJob(ScheduleExecute.class).withIdentity("job1", "group1").build();		
+		JobDetail jobDetail = JobBuilder.newJob(ScheduleExecute.class).withIdentity("jobTest", "group1").build();		
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();		
-		jobDataMap.put("Script", path);		
+		jobDataMap.put("Path", testpath);		
 //		触发器
 		SimpleTriggerImpl simpleTrigger = new SimpleTriggerImpl("simpleTrigger");
 		simpleTrigger.setStartTime(new Date(System.currentTimeMillis()));
@@ -34,17 +34,16 @@ public class Schedule {
 		simpleTrigger.setRepeatCount(10);
 		
 //		任务2
-		JobDetail jobDetail2 = JobBuilder.newJob(ScheduleExecute.class).withIdentity("job2", "group2").build();		
+		JobDetail jobDetail2 = JobBuilder.newJob(ScheduleExecute.class).withIdentity("jobMQTT", "group2").build();		
 		JobDataMap jobDataMap2 = jobDetail2.getJobDataMap();
-		jobDataMap2.put("Script", path);
+		jobDataMap2.put("Path", MQTTsubpath);
 //		触发器2
 		SimpleTriggerImpl simpleTrigger2 = new SimpleTriggerImpl("simpleTrigger2");
 		simpleTrigger2.setStartTime(new Date(System.currentTimeMillis()));
-		simpleTrigger2.setRepeatInterval(2000);
-		simpleTrigger2.setRepeatCount(5);
+//		simpleTrigger2.setRepeatInterval(2000);
+//		simpleTrigger2.setRepeatCount(5);
 		
-		
-		
+			
 		
 
 		scheduler.scheduleJob(jobDetail, simpleTrigger);

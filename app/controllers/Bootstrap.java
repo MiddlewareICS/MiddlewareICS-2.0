@@ -387,16 +387,14 @@ public class Bootstrap extends Job {
 //        client.start();
 
         //rhino
-        String filename = System.getProperty("user.dir") + "/public/customscripts/custom1.js";
-        JSExploration jsExploration = new JSExploration();   	
-        Object result = jsExploration.runJavaScript(filename); 
+//        String filename = System.getProperty("user.dir") + "/public/customscripts/custom1.js";
+//        JSExploration jsExploration = new JSExploration();   	
+//        Object result = jsExploration.runJavaScript(filename); 
         
-        String filename2 = System.getProperty("user.dir") + "/public/customscripts/MQTTsub.js";
-        JSExploration jsExploration2 = new JSExploration();   	
-        Object result2 = jsExploration2.runJavaScript(filename2); 
-        
-		// Play.configuration.list(System.out);
-        
+//        String filename2 = System.getProperty("user.dir") + "/public/customscripts/MQTTsub.js";
+//        JSExploration jsExploration2 = new JSExploration();   	
+//        Object result2 = jsExploration2.runJavaScript(filename2); 
+                
         
         //quartz
         Schedule mySchedule = new Schedule(); 
