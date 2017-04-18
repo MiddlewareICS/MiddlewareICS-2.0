@@ -59,8 +59,11 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;   
 import org.mozilla.javascript.Scriptable; 
 
+//quartz
+import org.quartz.SchedulerException;
+import javacode.Schedule;
 /**
- * @author samy
+ * @author hewei
  * 
  */
 @OnApplicationStart
@@ -393,6 +396,16 @@ public class Bootstrap extends Job {
         Object result2 = jsExploration2.runJavaScript(filename2); 
         
 		// Play.configuration.list(System.out);
+        
+        
+        //quartz
+        Schedule mySchedule = new Schedule(); 
+		try {
+			mySchedule.doSchedule();
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
