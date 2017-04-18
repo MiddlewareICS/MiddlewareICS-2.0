@@ -14,8 +14,6 @@
 //	 sleep(1000);
 //	 i++;
 // }
-// var circle = setTimeout( function(){ System.out.println("Here is circle of 5s");},5000);  不能运行
-// console.log('here is console.log');  不能运行
 //}    
 
 
