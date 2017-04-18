@@ -14,10 +14,17 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 //mqtt sub
 	public class MQTTsub {  
 		  
-	    public static final String HOST = "tcp://localhost:1883";  
-	    public static final String TOPIC = "ICS";  
+//	    public static final String HOST = "tcp://localhost:1883";  
+//	    public static final String TOPIC = "ICS"; 
+		private String HOST;
+		private String TOPIC;
 	    private MqttClient client;  
 	    private MqttConnectOptions options;  
+
+	    public MQTTsub(String host, String topic){
+	    	HOST=host;
+	    	TOPIC=topic;
+	    }
 	    
 	    public void start() {  
 	        try {  

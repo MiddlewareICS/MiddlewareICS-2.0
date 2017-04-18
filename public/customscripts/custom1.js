@@ -1,11 +1,11 @@
-var swingNames = JavaImporter();   
-swingNames.importPackage(Packages.java.lang);   
-  
-obj = {a:1, b:['x','y']}   
-next = isPrime   
-flag = isPrime(5)  
-
-with (swingNames) {   
+//var swingNames = JavaImporter();   
+//swingNames.importPackage(Packages.java.lang);   
+//  
+//obj = {a:1, b:['x','y']}   
+//next = isPrime   
+//flag = isPrime(5)  
+//
+//with (swingNames) {   
  System.out.println("\n###   Here is custom1.js   ###\n");  
 // System.out.println("\n###   The result of cunstom javascript function, isPrime(5), is: "+ flag +"   ###\n"); 
 // var i=0;
@@ -16,7 +16,7 @@ with (swingNames) {
 // }
 // var circle = setTimeout( function(){ System.out.println("Here is circle of 5s");},5000);  不能运行
 // console.log('here is console.log');  不能运行
-}    
+//}    
 
 
 function isPrime (num)   

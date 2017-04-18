@@ -50,8 +50,11 @@ public class ScheduleExecute implements Job {
 	            while ((s = reader.readLine()) != null)   
 	            {   
 	                sb.append(s).append("\n");   
-	            }   
-	            return sb.toString();   
+	            }  
+	            
+	            String ScriptFront = "var swingNames = JavaImporter(); \n swingNames.importPackage(Packages.java.lang); \n  swingNames.importPackage(Packages.javacode); \n with (swingNames) {  \n";
+	            String ScriptEnd = "}";
+	            return ScriptFront+sb.toString()+ScriptEnd;   
 	        }   
 	        catch (Exception e)   
 	        {   
