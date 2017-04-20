@@ -196,112 +196,115 @@ public class Bootstrap extends Job {
 
 		UserProfileModel.deleteAll();
 		SensorActAPI.userProfile.addUserProfile(owner, ownerKey);
+	
 	}
 
 //	启动MQTTsub
 	public class mqttSub {  
 		  
-	    public static final String HOST = "tcp://localhost:1883";  
-	    public static final String TOPIC = "ICS";  
-	    private MqttClient client;  
-	    private MqttConnectOptions options;  
-	    
-	    private void start() {  
-	        try {  
-	            // host为主机名，clientid即连接MQTT的客户端ID，一般以唯一标识符表示，MemoryPersistence设置clientid的保存形式，默认为以内存保存  
-	            client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish1"); 
-	            
-	            // MQTT的连接设置  
-	            options = new MqttConnectOptions();  
-	            
-	            // 设置回调  
-	            client.setCallback(new PushCallback()); 
-	            
-	            MqttTopic topic = client.getTopic(TOPIC);  
-	            //setWill方法，如果项目中需要知道客户端是否掉线可以调用该方法。设置最终端口的通知消息  
-//	            options.setWill(topic, "close".getBytes(), 2, true);  
-	  
-	            client.connect(options);  
-	            
-	            //订阅消息  
-	            int[] Qos  = {0};  
-	            String[] topic1 = {TOPIC}; 
-	            
-	            //订阅
-	        	client.subscribe(topic1, Qos);
-	                
-	        } catch (Exception e) {  
-	            System.out.println("Error");
-	            e.printStackTrace();  
-
-	        }  
-	    }  
-	    
-	    //回调函数    
-	    public class PushCallback implements MqttCallback {  
-	    	  
-	    	public void connectionLost(Throwable cause) {  
-		        // 连接丢失后，一般在这里面进行重连  
-		        System.out.println("连接断开，可以做重连");  
-		    }    
-		    public void deliveryComplete(IMqttDeliveryToken token) {  
-		        System.out.println("deliveryComplete---------" + token.isComplete());  
-		    }  
-		  
-		    public void messageArrived(String topic, MqttMessage message) throws Exception {  
-		        // subscribe后得到的消息会执行到这里面  
-		        System.out.println("接收消息主题 : " + topic);  
-		        System.out.println("接收消息Qos : " + message.getQos());  
-		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
-		        
-		        //Esper
-//		        myEsper();
-		        Temperature temperature1 = new Temperature();  
-		        temperature1.setId(1);  
-		        temperature1.setTemperature(5);  
-		        runtime.sendEvent(temperature1);  
-
-		        Temperature temperature2 = new Temperature();   
-		        temperature2.setId(2);  
-		        temperature2.setTemperature(2);  
-		        runtime.sendEvent(temperature2);  
-
-		        Temperature temperature3 = new Temperature();   
-		        temperature3.setId(3);  
-		        temperature3.setTemperature(5);  
-		        runtime.sendEvent(temperature3); 
-		        
-		        //添加设备
-		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
-
-		        
-		    }    
-	    } 
+//	    public static final String HOST = "tcp://localhost:1883";  
+//	    public static final String TOPIC = "ICS";  
+//	    private MqttClient client;  
+//	    private MqttConnectOptions options;  
+//	    
+//	    private void start() {  
+//	        try {  
+//	            // host为主机名，clientid即连接MQTT的客户端ID，一般以唯一标识符表示，MemoryPersistence设置clientid的保存形式，默认为以内存保存  
+//	            client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish1"); 
+//	            
+//	            // MQTT的连接设置  
+//	            options = new MqttConnectOptions();  
+//	            
+//	            // 设置回调  
+//	            client.setCallback(new PushCallback()); 
+//	            
+//	            MqttTopic topic = client.getTopic(TOPIC);  
+//	            //setWill方法，如果项目中需要知道客户端是否掉线可以调用该方法。设置最终端口的通知消息  
+////	            options.setWill(topic, "close".getBytes(), 2, true);  
+//	  
+//	            client.connect(options);  
+//	            
+//	            //订阅消息  
+//	            int[] Qos  = {0};  
+//	            String[] topic1 = {TOPIC}; 
+//	            
+//	            //订阅
+//	        	client.subscribe(topic1, Qos);
+//	                
+//	        } catch (Exception e) {  
+//	            System.out.println("Error");
+//	            e.printStackTrace();  
+//
+//	        }  
+//	    }  
+//	    
+//	    //回调函数    
+//	    public class PushCallback implements MqttCallback {  
+//	    	  
+//	    	public void connectionLost(Throwable cause) {  
+//		        // 连接丢失后，一般在这里面进行重连  
+//		        System.out.println("连接断开，可以做重连");  
+//		    }    
+//		    public void deliveryComplete(IMqttDeliveryToken token) {  
+//		        System.out.println("deliveryComplete---------" + token.isComplete());  
+//		    }  
+//		  
+//		    public void messageArrived(String topic, MqttMessage message) throws Exception {  
+//		        // subscribe后得到的消息会执行到这里面  
+//		        System.out.println("接收消息主题 : " + topic);  
+//		        System.out.println("接收消息Qos : " + message.getQos());  
+//		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
+//		        
+//		        //Esper
+////		        myEsper();
+//		        Temperature temperature1 = new Temperature();  
+//		        temperature1.setId(1);  
+//		        temperature1.setTemperature(5);  
+//		        myEsper.runtime.sendEvent(temperature1);  
+//
+//		        Temperature temperature2 = new Temperature();   
+//		        temperature2.setId(2);  
+//		        temperature2.setTemperature(2);  
+//		        myEsper.runtime.sendEvent(temperature2);  
+//
+//		        Temperature temperature3 = new Temperature();   
+//		        temperature3.setId(3);  
+//		        temperature3.setTemperature(5);  
+//		        myEsper.runtime.sendEvent(temperature3); 
+//		        
+//		        //添加设备
+//		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
+//
+//		        
+//		    }    
+//	    } 
 	    
 	}  
 	
 	
 //	Esper
+//	public static String Epl = "select avg(temperature) from " + Temperature.class.getName() + ".win:length_batch(3)";  
+	public static CEPEsper myEsper = new  CEPEsper();
 	//监听事件
-	public class TemperatureListener implements UpdateListener  
-	{  
-	    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
-	    {  
-	        if (newEvents != null)  
-	        {  
-	            Double avg = (Double) newEvents[0].get("avg(temperature)");  
-	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
-	        }  
-	    }  
-	  
-	}  
-	//esper 变量
-	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
-	public EPAdministrator admin = epService.getEPAdministrator();  
-	public String product = Temperature.class.getName();  
-	public String epl = "select avg(temperature) from " + product + ".win:length_batch(3)";  
-	public EPStatement state = admin.createEPL(epl);  
-	public EPRuntime runtime = epService.getEPRuntime();  
+//	public class TemperatureListener implements UpdateListener  
+//	{  
+//	    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
+//	    {  
+//	        if (newEvents != null)  
+//	        {  
+//	            Double avg = (Double) newEvents[0].get("avg(temperature)");  
+//	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
+//	        }  
+//	    }  
+//	  
+//	}  
+//	//esper 变量
+//	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
+//	public EPAdministrator admin = epService.getEPAdministrator();  
+//	public String product = Temperature.class.getName();  
+//	public String epl = "select avg(temperature) from " + product + ".win:length_batch(3)";  
+//	public EPStatement state = admin.createEPL(epl);  
+//	public EPRuntime runtime = epService.getEPRuntime();  
 	
 	
 //	Rhino
@@ -361,7 +364,7 @@ public class Bootstrap extends Job {
 		addOwnerProfile();
 		
 		//esper
-		state.addListener(new TemperatureListener()); 
+		myEsper.state.addListener(myEsper.listener); 
 		
 		//mqtt
 //		mqttSub client = new mqttSub();  

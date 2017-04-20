@@ -7,9 +7,12 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttTopic;  
+import org.eclipse.paho.client.mqttv3.MqttTopic;
 
+import edu.pc3.sensoract.vpds.api.SensorActAPI;  
 
+import javacode.*;
+import controllers.Bootstrap;
 
 //mqtt sub
 	public class MQTTsub {  
@@ -74,7 +77,26 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 		        System.out.println("接收消息Qos : " + message.getQos());  
 		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
 		        
+		        
+		        //Esper
+//		        myEsper();
+		        Temperature temperature1 = new Temperature();  
+		        temperature1.setId(1);  
+		        temperature1.setTemperature(5); 
+		        Bootstrap.myEsper.runtime.sendEvent(temperature1);  
 
+		        Temperature temperature2 = new Temperature();   
+		        temperature2.setId(2);  
+		        temperature2.setTemperature(2);  
+		        Bootstrap.myEsper.runtime.sendEvent(temperature2);  
+
+		        Temperature temperature3 = new Temperature();   
+		        temperature3.setId(3);  
+		        temperature3.setTemperature(5);  
+		        Bootstrap.myEsper.runtime.sendEvent(temperature3); 
+		        
+		        //添加设备
+		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
 		        
 		    }   
 	    } 
