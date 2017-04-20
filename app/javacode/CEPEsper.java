@@ -19,18 +19,19 @@ public class CEPEsper
 //	public String className;  
 //	public static String epl ; 
 ////	构造函数
-//	public CEPEsper( String EsperL)
-//	{
-////		className = ClassName;
-//		epl = EsperL;
-//	}
+	
 
 	public static EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
 	public static EPAdministrator admin = epService.getEPAdministrator();  
-	public static String product = Temperature.class.getName();  
-	public static String epl = "select avg(temperature) from " + product + ".win:length_batch(3)";  	 
-	public static EPStatement state = admin.createEPL(epl);  
+	public static EPStatement state ; 
 	public static  EPRuntime runtime = epService.getEPRuntime();  
+	
+//	构造函数
+	public CEPEsper( String EsperL)
+	{
+		state = admin.createEPL(EsperL);
+	}	
+	
 	
  
 	//监听事件

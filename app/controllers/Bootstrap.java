@@ -283,28 +283,9 @@ public class Bootstrap extends Job {
 	
 	
 //	Esper
-//	public static String Epl = "select avg(temperature) from " + Temperature.class.getName() + ".win:length_batch(3)";  
-	public static CEPEsper myEsper = new  CEPEsper();
-	//监听事件
-//	public class TemperatureListener implements UpdateListener  
-//	{  
-//	    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
-//	    {  
-//	        if (newEvents != null)  
-//	        {  
-//	            Double avg = (Double) newEvents[0].get("avg(temperature)");  
-//	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
-//	        }  
-//	    }  
-//	  
-//	}  
-//	//esper 变量
-//	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
-//	public EPAdministrator admin = epService.getEPAdministrator();  
-//	public String product = Temperature.class.getName();  
-//	public String epl = "select avg(temperature) from " + product + ".win:length_batch(3)";  
-//	public EPStatement state = admin.createEPL(epl);  
-//	public EPRuntime runtime = epService.getEPRuntime();  
+	public static String Epl = "select avg(temperature) from " + Temperature.class.getName() + ".win:length_batch(3)";  
+	public static CEPEsper myEsper = new  CEPEsper(Epl);
+
 	
 	
 //	Rhino
@@ -363,24 +344,11 @@ public class Bootstrap extends Job {
 		verifyOwnerKeys();
 		addOwnerProfile();
 		
-		//esper
+		//esper 复杂事件处理
 		myEsper.state.addListener(myEsper.listener); 
-		
-		//mqtt
-//		mqttSub client = new mqttSub();  
-//        client.start();
-
-        //rhino
-//        String filename = System.getProperty("user.dir") + "/public/customscripts/custom1.js";
-//        JSExploration jsExploration = new JSExploration();   	
-//        Object result = jsExploration.runJavaScript(filename); 
+		              
         
-//        String filename2 = System.getProperty("user.dir") + "/public/customscripts/MQTTsub.js";
-//        JSExploration jsExploration2 = new JSExploration();   	
-//        Object result2 = jsExploration2.runJavaScript(filename2); 
-                
-        
-        //quartz
+        //quartz 任务调度 包含脚本任务
         Schedule mySchedule = new Schedule(); 
 		try {
 			mySchedule.doSchedule();
