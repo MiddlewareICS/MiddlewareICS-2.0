@@ -34,6 +34,7 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 
 import com.mongodb.*;
 
+import javacode.*;
 
 //为设备信息插入数据库而引入
 import java.util.HashMap;
@@ -51,6 +52,8 @@ import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;  
 import com.espertech.esper.client.EventBean;  
 import com.espertech.esper.client.UpdateListener;  
+
+
   
 //Rhino
 import java.io.FileReader;   
@@ -62,6 +65,9 @@ import org.mozilla.javascript.Scriptable;
 //quartz
 import org.quartz.SchedulerException;
 import javacode.Schedule;
+
+
+
 /**
  * @author hewei
  * 
@@ -250,65 +256,40 @@ public class Bootstrap extends Job {
 		        
 		        //Esper
 //		        myEsper();
-		        Apple apple1 = new Apple();  
-		        apple1.setId(1);  
-		        apple1.setPrice(5);  
-		        runtime.sendEvent(apple1);  
+		        Temperature temperature1 = new Temperature();  
+		        temperature1.setId(1);  
+		        temperature1.setTemperature(5);  
+		        runtime.sendEvent(temperature1);  
 
-		        Apple apple2 = new Apple();  
-		        apple2.setId(2);  
-		        apple2.setPrice(2);  
-		        runtime.sendEvent(apple2);  
+		        Temperature temperature2 = new Temperature();   
+		        temperature2.setId(2);  
+		        temperature2.setTemperature(2);  
+		        runtime.sendEvent(temperature2);  
 
-		        Apple apple3 = new Apple();  
-		        apple3.setId(3);  
-		        apple3.setPrice(5);  
-		        runtime.sendEvent(apple3);  
+		        Temperature temperature3 = new Temperature();   
+		        temperature3.setId(3);  
+		        temperature3.setTemperature(5);  
+		        runtime.sendEvent(temperature3); 
 		        
 		        //添加设备
 		        SensorActAPI.deviceAdd.doProcess(new String(message.getPayload()));
 
 		        
-		    }   
+		    }    
 	    } 
 	    
 	}  
 	
 	
 //	Esper
-	public class Apple  
-	{  
-	    private int id;  
-	    private int price;  
-	  
-	    public int getId()  
-	    {  
-	        return id;  
-	    }  
-	  
-	    public void setId(int id)  
-	    {  
-	        this.id = id;  
-	    }  
-	  
-	    public int getPrice()  
-	    {  
-	        return price;  
-	    }  
-	  
-	    public void setPrice(int price)  
-	    {  
-	        this.price = price;  
-	    }  
-	}  
 	//监听事件
-	public class AppleListener implements UpdateListener  
+	public class TemperatureListener implements UpdateListener  
 	{  
 	    public void update(EventBean[] newEvents, EventBean[] oldEvents)  
 	    {  
 	        if (newEvents != null)  
 	        {  
-	            Double avg = (Double) newEvents[0].get("avg(price)");  
+	            Double avg = (Double) newEvents[0].get("avg(temperature)");  
 	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
 	        }  
 	    }  
@@ -317,8 +298,8 @@ public class Bootstrap extends Job {
 	//esper 变量
 	public EPServiceProvider epService = EPServiceProviderManager.getDefaultProvider();      
 	public EPAdministrator admin = epService.getEPAdministrator();  
-	public String product = Apple.class.getName();  
-	public String epl = "select avg(price) from " + product + ".win:length_batch(3)";  
+	public String product = Temperature.class.getName();  
+	public String epl = "select avg(temperature) from " + product + ".win:length_batch(3)";  
 	public EPStatement state = admin.createEPL(epl);  
 	public EPRuntime runtime = epService.getEPRuntime();  
 	
@@ -380,7 +361,7 @@ public class Bootstrap extends Job {
 		addOwnerProfile();
 		
 		//esper
-		state.addListener(new AppleListener()); 
+		state.addListener(new TemperatureListener()); 
 		
 		//mqtt
 //		mqttSub client = new mqttSub();  
