@@ -20,7 +20,7 @@ public class Temperature
         return temperature;  
     }  
   
-    public void setTemperature(int price)  
+    public void setTemperature(int temperature)  
     {  
         this.temperature = temperature;  
     }  
