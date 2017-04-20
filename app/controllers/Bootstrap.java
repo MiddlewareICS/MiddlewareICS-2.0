@@ -213,9 +213,14 @@ public class Bootstrap extends Job {
 		verifyOwnerKeys();
 		addOwnerProfile();
 		
+		
+		
+		
+		
+		
+		
 		//esper 复杂事件处理
-		myEsper.state.addListener(myEsper.listener); 
-		              
+		myEsper.state.addListener(myEsper.listener); 	              
         
         //quartz 任务调度 包含脚本任务
         Schedule mySchedule = new Schedule(); 
