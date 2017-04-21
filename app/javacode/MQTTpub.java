@@ -20,11 +20,13 @@ public class MQTTpub {
   MqttClient client;
   private String HOST;
   private String TOPIC;
-  public String JSpath = System.getProperty("user.dir") + "/public/customscripts/toDevice.js";
+  private String CONTENT;
+//  public String JSpath = System.getProperty("user.dir") + "/public/customscripts/toDevice.js";
   
-  public MQTTpub(String host, String topic) {
+  public MQTTpub(String host, String topic, String content) {
 	HOST=host;
   	TOPIC=topic;
+  	CONTENT=content;
   }
   
   public void start() {
@@ -32,8 +34,8 @@ public class MQTTpub {
       client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish2");
       client.connect();
       MqttMessage message = new MqttMessage();
-      String content = new API().getJsContent(JSpath);
-      message.setPayload(content.getBytes());
+//      String content = new API().getJsContent(JSpath);
+      message.setPayload(CONTENT.getBytes());
       
       while(true){
     	  client.publish("toDevice", message);
