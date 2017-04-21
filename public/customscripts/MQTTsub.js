@@ -8,5 +8,9 @@
  // user does
  client = new MQTTsub("tcp://localhost:1883","ICS");  
  client.start();
+ 
+ 
+ pubClient = new MQTTpub();
+ pubClient.start();
 //}    
  

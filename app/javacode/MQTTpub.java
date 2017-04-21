@@ -19,14 +19,14 @@ public class MQTTpub {
   
   public void start() {
     try {
-      client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish1");
+      client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish2");
       client.connect();
       MqttMessage message = new MqttMessage();
-      message.setPayload("A single message".getBytes());
+      message.setPayload("console.log(12345678);".getBytes());
       
       while(true){
-    	  client.publish("ICS", message);
-    	  System.out.println("--Pub: "+message.toString());
+    	  client.publish("toDevice", message);
+    	  System.out.println("-- Server Pub: "+message.toString());
     	  try{
     		  	Thread.sleep(5000); 		  	
     	  }catch(InterruptedException e){

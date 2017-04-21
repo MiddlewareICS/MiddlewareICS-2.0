@@ -73,9 +73,9 @@ import controllers.Bootstrap;
 		  
 		    public void messageArrived(String topic, MqttMessage message) throws Exception {  
 		        // subscribe后得到的消息会执行到这里面  
-		        System.out.println("接收消息主题 : " + topic);  
-		        System.out.println("接收消息Qos : " + message.getQos());  
-		        System.out.println("接收消息内容 : " + new String(message.getPayload()));
+//		        System.out.println("接收消息主题 : " + topic);  
+//		        System.out.println("接收消息Qos : " + message.getQos());  
+		        System.out.println("-- Server Sub : " + topic + new String(message.getPayload()));
 		        
 		        
 		        //Esper
