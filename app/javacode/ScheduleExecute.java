@@ -33,7 +33,7 @@ public class ScheduleExecute implements Job {
 	    //  运行js
 	    public Object runJavaScript(String filename)   
 	    {   
-            String ScriptFront = "var swingNames = JavaImporter(); \n swingNames.importPackage(Packages.java.lang); \n  swingNames.importPackage(Packages.javacode); \n with (swingNames) {  \n";
+            String ScriptFront = "var swingNames = JavaImporter(); \n swingNames.importPackage(Packages.java.lang); \n  swingNames.importPackage(Packages.javacode); \n with (swingNames) {  \n ";
             String ScriptEnd = "}";
 	        String jsContent = ScriptFront + new API().getJsContent(filename) + ScriptEnd;   
 	        Object result = cx.evaluateString(scope, jsContent, filename, 1, null);   
