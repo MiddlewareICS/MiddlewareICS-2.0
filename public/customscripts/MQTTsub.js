@@ -10,7 +10,7 @@
  client.start();
  
  
- pubClient = new MQTTpub();
+ pubClient = new MQTTpub("tcp://localhost:1883","toDevice");
  pubClient.start();
 //}    
  
