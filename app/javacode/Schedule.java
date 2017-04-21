@@ -40,8 +40,7 @@ public class Schedule {
 //		触发器2
 		SimpleTriggerImpl simpleTrigger2 = new SimpleTriggerImpl("simpleTrigger2");
 		simpleTrigger2.setStartTime(new Date(System.currentTimeMillis()));
-//		simpleTrigger2.setRepeatInterval(2000);
-//		simpleTrigger2.setRepeatCount(5);
+
 		
 			
 		

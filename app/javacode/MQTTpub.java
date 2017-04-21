@@ -12,6 +12,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttTopic;  
 
+import javacode.*;
 
 
 public class MQTTpub {
@@ -31,8 +32,8 @@ public class MQTTpub {
       client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish2");
       client.connect();
       MqttMessage message = new MqttMessage();
-//      message.setPayload("console.log(12345678);".getBytes());
-      message.setPayload(getJsContent(JSpath).getBytes());
+      String content = new API().getJsContent(JSpath);
+      message.setPayload(content.getBytes());
       
       while(true){
     	  client.publish("toDevice", message);
@@ -48,29 +49,5 @@ public class MQTTpub {
       e.printStackTrace();
     }
   }
-  
-//从js文件读出内容，返回String
-  private String getJsContent(String filename)   
-  {   
-      LineNumberReader reader;   
-      try  
-      {   
-          reader = new LineNumberReader(new FileReader(filename));   
-          String s = null;   
-          StringBuffer sb = new StringBuffer();   
-          while ((s = reader.readLine()) != null)   
-          {   
-              sb.append(s).append("\n");   
-          }  
-          
-          return sb.toString();   
-      }   
-      catch (Exception e)   
-      {   
-          // TODO Auto-generated catch block   
-          e.printStackTrace();   
-          return null;   
-      }   
-  }   
-  
+
 }
