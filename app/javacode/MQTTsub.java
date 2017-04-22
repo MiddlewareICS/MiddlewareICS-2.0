@@ -73,26 +73,26 @@ import controllers.Bootstrap;
 		  
 		    public void messageArrived(String topic, MqttMessage message) throws Exception {  
 		        // subscribe后得到的消息会执行到这里面  
-//		        System.out.println("接收消息主题 : " + topic);  
+		        // System.out.println("\n-- 接收信息主题 : " + topic);  
 //		        System.out.println("接收消息Qos : " + message.getQos());  
-		        System.out.println("-- Server Sub : " + topic + new String(message.getPayload()));
+		        System.out.println("\n-- Server Sub : " + topic + new String(message.getPayload()));
 		        
 		        
 		        //Esper
 //		        myEsper();
 		        Temperature temperature1 = new Temperature();  
 		        temperature1.setId(1);  
-		        temperature1.setTemperature(5); 
+		        temperature1.setTemperature(20); 
 		        Bootstrap.myEsper.runtime.sendEvent(temperature1);  
 
 		        Temperature temperature2 = new Temperature();   
 		        temperature2.setId(2);  
-		        temperature2.setTemperature(2);  
+		        temperature2.setTemperature(25);  
 		        Bootstrap.myEsper.runtime.sendEvent(temperature2);  
 
 		        Temperature temperature3 = new Temperature();   
 		        temperature3.setId(3);  
-		        temperature3.setTemperature(5);  
+		        temperature3.setTemperature(15);  
 		        Bootstrap.myEsper.runtime.sendEvent(temperature3); 
 		        
 		        //添加设备

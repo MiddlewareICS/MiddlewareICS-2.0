@@ -38,8 +38,8 @@ public class MQTTpub {
       message.setPayload(CONTENT.getBytes());
       
       while(true){
-    	  client.publish("toDevice", message);
-    	  System.out.println("-- Server Pub: "+message.toString());
+    	  client.publish(TOPIC, message);
+    	  System.out.println("\n-- Server Pub: "+TOPIC+"\n"+message.toString());
     	  try{
     		  	Thread.sleep(5000); 		  	
     	  }catch(InterruptedException e){

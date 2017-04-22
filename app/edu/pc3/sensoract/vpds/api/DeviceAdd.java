@@ -224,7 +224,7 @@ public class DeviceAdd extends SensorActAPI {
 	public void doProcess(final String deviceAddJson) {
 
 		try {
-			System.out.println("---here is DeviceAdd and the device content:");
+			System.out.println("\n---  here is DeviceAdd and the device content:");
 			System.out.println(deviceAddJson);
 			DeviceAddFormat newDevice = convertToRequestFormat(deviceAddJson,
 					DeviceAddFormat.class);

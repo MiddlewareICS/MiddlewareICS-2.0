@@ -55,7 +55,6 @@ public class ScheduleExecute implements Job {
 		JobDataMap jobDataMap = context.getJobDetail().getJobDataMap();
 //		脚本路径
 		String path = (String) jobDataMap.get("Path");
-		System.out.println(path + "  &&&&  \n");
 //		运行脚本
         JSExploration jsExploration = new JSExploration();   	
         Object result = jsExploration.runJavaScript(path); 

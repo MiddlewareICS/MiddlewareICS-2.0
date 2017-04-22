@@ -42,7 +42,7 @@ public class CEPEsper
 	        if (newEvents != null)  
 	        {  
 	            Double avg = (Double) newEvents[0].get("avg(temperature)");  
-	            System.out.println("Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
+	            System.out.println("\n@@  CEP:Average temperature of ICS is " + avg+" and newEvents length is"+newEvents.length);  
 	        }  
 	    }  
 	  
