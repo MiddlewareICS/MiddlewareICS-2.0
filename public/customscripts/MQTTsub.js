@@ -7,16 +7,15 @@
  System.out.println("### Here is MQTTsub.js ### \n");
 
  
- // user does
- client = new MQTTsub("tcp://localhost:1883","ICS");  
+ // sub
+ client = new MQTTsub("tcp://192.168.199.170:1883","ICS","subDevice1");  
  client.start();
  
+ client = new MQTTsub("tcp://192.168.199.170:1883","Environment","subDevice2");  
+ client.start();
  
- var JSpath = System.getProperty("user.dir") + "/public/customscripts/toDevice.js";
- var API = new API();
- var content = API.getJsContent(JSpath);
+
  
- pubClient = new MQTTpub("tcp://localhost:1883","toDevice",content);
- pubClient.start();
+ 
 //}    
  

@@ -21,17 +21,19 @@ public class MQTTpub {
   private String HOST;
   private String TOPIC;
   private String CONTENT;
+  private String ClientId;
 //  public String JSpath = System.getProperty("user.dir") + "/public/customscripts/toDevice.js";
   
-  public MQTTpub(String host, String topic, String content) {
+  public MQTTpub(String host, String topic, String content, String clientid) {
 	HOST=host;
   	TOPIC=topic;
   	CONTENT=content;
+  	ClientId = clientid;
   }
   
   public void start() {
     try {
-      client = new MqttClient("tcp://127.0.0.1:1883", "pahomqttPublish2");
+      client = new MqttClient(HOST, ClientId);
       client.connect();
       MqttMessage message = new MqttMessage();
 //      String content = new API().getJsContent(JSpath);
