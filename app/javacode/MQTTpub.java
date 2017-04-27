@@ -22,7 +22,6 @@ public class MQTTpub {
   private String TOPIC;
   private String CONTENT;
   private String ClientId;
-//  public String JSpath = System.getProperty("user.dir") + "/public/customscripts/toDevice.js";
   
   public MQTTpub(String host, String topic, String content, String clientid) {
 	HOST=host;
@@ -41,7 +40,7 @@ public class MQTTpub {
       
       while(true){
     	  client.publish(TOPIC, message);
-    	  System.out.println("\n-- Server Pub: "+TOPIC+"\n"+message.toString());
+    	  System.out.println("\n-- Server Pub: "+TOPIC);
     	  try{
     		  	Thread.sleep(5000); 		  	
     	  }catch(InterruptedException e){
