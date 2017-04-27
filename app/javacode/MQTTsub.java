@@ -119,27 +119,6 @@ import com.mongodb.util.JSON;
 		            DBObject dbObject =(DBObject)JSON.parse(jsonContent);
 		            collection.insert(dbObject);
 		            
-//		            DBObject user = new BasicDBObject();  
-//		            user.put("name", "jimmy");  
-//		            user.put("age", "34");  
-//		            DBObject address = new BasicDBObject();  
-//		            address.put("city", "bj");  
-//		            address.put("street", "bq road");  
-//		            address.put("mail", "ufpark 68#");   
-//		            user.put("address", address);  
-//	  
-//		            users.insert(user);  
-//		            
-		            // 从集合中查询数据，我们就查询一条，调用findOne即可  
-//		            DBObject dbUser = users.findOne();  
-//		            System.out.println("插入数据库：");
-//		            System.out.println("name" + " : "  + dbUser.get("name") );  
-//		            System.out.println("age" + " : "  + dbUser.get("age") );  
-//		            DBObject dbAddress = (DBObject)user.get("address");  
-//		            System.out.println("city" + " : "  + dbAddress.get("city") );  
-//		            System.out.println("street" + " : "  + dbAddress.get("street") );  
-//		            System.out.println("mail" + " : "  + dbAddress.get("mail") );  
-		            
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
 		        }
