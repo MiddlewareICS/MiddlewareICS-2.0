@@ -49,6 +49,7 @@ package edu.pc3.sensoract.vpds.api.request;
 public class DeviceSearchFormat {
 
 	public String secretkey = null;
+	public String target = null;
 	// TODO: add other parameters
 
 }

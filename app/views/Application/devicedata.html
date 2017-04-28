@@ -87,12 +87,12 @@
 				<ul id="main-menu" class="main-menu">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-					<li class="home active">
+					<li class="home">
 						<a href="http://localhost:9000/home">
 							<span class="title">首页</span>
 						</a>
 					</li>
-					<li class="devicedata">
+					<li class="devicedata active">
 						<a href="http://localhost:9000/devicedata">
 							<span class="title">节点数据</span>
 						</a>
@@ -464,7 +464,199 @@
 
 			<div>Welcome to ICS!</div>
 
-		
+
+			<script type="text/javascript">
+				jQuery(document).ready(function($)
+				{	
+					
+					
+					// Charts
+					var xenonPalette = ['#68b828','#7c38bc','#0e62c7','#fcd036','#4fcdfc','#00b19d','#ff6264','#f7aa47'];
+					
+					// Pageviews Visitors Chart
+					var i = 0,
+						line_chart_data_source = [
+						{ id: ++i, part1: 4 },
+						{ id: ++i, part1: 5 },
+						{ id: ++i, part1: 5 },
+						{ id: ++i, part1: 4 },
+						{ id: ++i, part1: 3 },
+						{ id: ++i, part1: 3 },
+						{ id: ++i, part1: 5 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 9 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 11 },
+						{ id: ++i, part1: 10 },
+						{ id: ++i, part1: 9 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 15 },
+						{ id: ++i, part1: 10 },
+						{ id: ++i, part1: 9 },
+						{ id: ++i, part1: 9 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 9 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 6 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 7 },
+						{ id: ++i, part1: 8 },
+						{ id: ++i, part1: 6 },
+						{ id: ++i, part1: 5 },
+						{ id: ++i, part1: 5 },
+						{ id: ++i, part1: 6 },
+					];
+					
+					$("#pageviews-visitors-chart").dxChart({
+						dataSource: line_chart_data_source,
+						commonSeriesSettings: {
+							argumentField: "id",
+							point: { visible: true, size: 5, hoverStyle: {size: 7, border: 0, color: 'inherit'} },
+							line: {width: 1, hoverStyle: {width: 1}}
+						},
+						series: [
+							{ valueField: "part1", name: "Temperature", color: "#68b828" }
+						
+						],
+						legend: {
+							position: 'inside',
+							paddingLeftRight: 5
+						},
+						commonAxisSettings: {
+							label: {
+								visible: false
+							},
+							grid: {
+								visible: true,
+								color: '#f9f9f9'
+							}
+						},
+						valueAxis: {
+							max: 25
+						},
+						argumentAxis: {
+					        valueMarginsEnabled: false
+					    },
+					});
+
+
+
+
+					// Realtime Network Stats
+					var i = 0,
+						rns_values = [130,150],
+						rns2_values = [39,50],
+						realtime_network_stats = [];
+					
+					for(i=0; i<=100; i++)
+					{
+						realtime_network_stats.push({ id: i, x1: between(rns_values[0], rns_values[1]), x2: between(rns2_values[0], rns2_values[1])});
+					}
+					
+					$("#realtime-network-stats").dxChart({
+						dataSource: realtime_network_stats,
+						commonSeriesSettings: {
+							type: "area",
+							argumentField: "id"
+						},
+						series: [
+							{ valueField: "x1", name: "Packets Sent", color: '#7c38bc', opacity: .4 },
+							{ valueField: "x2", name: "Packets Received", color: '#000', opacity: .5},
+						],
+						legend: {
+							verticalAlignment: "bottom",
+							horizontalAlignment: "center"
+						},
+						commonAxisSettings: {
+							label: {
+								visible: false
+							},
+							grid: {
+								visible: true,
+								color: '#f5f5f5'
+							}
+						},
+						legend: {
+							visible: false
+						},
+						argumentAxis: {
+					        valueMarginsEnabled: false
+					    },
+						valueAxis: {
+							max: 500
+						},
+						animation: {
+							enabled: false
+						}
+					}).data('iCount', i);
+					
+
+					
+					setInterval(function(){  networkRealtimeChartTick(rns_values, rns2_values); }, 1000);
+	
+				});
+
+				function networkRealtimeChartTick(min_max, min_max2)
+				{
+					var $ = jQuery,
+						i = 0;
+					
+					var chart_data = $('#realtime-network-stats').dxChart('instance').option('dataSource');
+					
+					var count = $('#realtime-network-stats').data('iCount');
+					
+					$('#realtime-network-stats').data('iCount', count + 1);
+					
+					chart_data.shift();
+					chart_data.push({id: count + 1, x1: between(min_max[0],min_max[1]), x2: between(min_max2[0],min_max2[1])});
+					
+					$('#realtime-network-stats').dxChart('instance').option('dataSource', chart_data);
+				}
+								
+				function between(randNumMin, randNumMax)
+				{
+					var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
+					
+					return randInt;
+				}
+			</script>
+
+			<div class="row">
+				<div class="col-sm-12">
+					
+					<div class="chart-item-bg">
+						<div class="chart-label">
+							<!-- <div class="h3 text-secondary text-bold" data-count="this" data-from="0.00" data-to="14.85" data-suffix="%" data-duration="1">0.00%</div> -->
+							<div class="h3 text-bold">实验室温度检测</div>
+							<span class="h4 text-muted">±2℃</span>
+						</div>
+						<div id="pageviews-visitors-chart" style="height: 298px;"></div>
+					</div>
+					
+				</div>
+				<div class="col-sm-12">
+					
+					<div class="chart-item-bg">
+						<div class="chart-label">
+							<!-- <div id="network-mbs-packets" class="h1 text-purple text-bold" data-count="this" data-from="0.00" data-to="21.05" data-suffix="mb/s" data-duration="1">0.00mb/s</div> -->
+							<span class="h3 text-purple text-bold">Temperature ±2℃</span>
+						</div>
+						<div id="realtime-network-stats" style="height: 320px"></div>
+					</div>
+
+				</div>
+
+			</div>
+			
+
 		</div>
 		
 		<!--聊天-->

@@ -41,9 +41,16 @@
 package edu.pc3.sensoract.vpds.api;
 
 import edu.pc3.sensoract.vpds.api.request.DeviceSearchFormat;
+import edu.pc3.sensoract.vpds.api.response.DeviceProfileFormat;
 import edu.pc3.sensoract.vpds.constants.Const;
 import edu.pc3.sensoract.vpds.enums.ErrorType;
 import edu.pc3.sensoract.vpds.exceptions.InvalidJsonException;
+
+import java.util.List;
+
+import com.mongodb.*;
+import com.mongodb.util.JSON;
+
 
 /**
  * device/search API: Searches device profiles in the repository
@@ -91,9 +98,11 @@ public class DeviceSearch extends SensorActAPI {
 						ErrorType.UNREGISTERED_SECRETKEY,
 						deviceSearchRequest.secretkey);
 			}
+			
+			String matchDevices = searchDevice(deviceSearchRequest.target);
 
 			// TODO: Search device
-			response.SendSuccess(Const.API_DEVICE_SEARCH, Const.TODO);
+			response.SendSuccess(Const.API_DEVICE_SEARCH, matchDevices);
 
 		} catch (InvalidJsonException e) {
 			response.sendFailure(Const.API_DEVICE_SEARCH,
@@ -102,6 +111,34 @@ public class DeviceSearch extends SensorActAPI {
 			response.sendFailure(Const.API_DEVICE_SEARCH,
 					ErrorType.SYSTEM_ERROR, e.getMessage());
 		}
+	}
+	private String searchDevice(String target){
+		 //mongodb
+    	String resultStr ="";
+        try{	        
+        	System.out.println("searching");
+        	Mongo mongo = new Mongo("127.0.0.1",27017);  
+            DB db =mongo.getDB("study"); 
+            DBCollection collection = db.getCollection(target);
+            DBCursor cursor = collection.find();
+            List<DBObject> list = cursor.toArray();
+            System.out.println(list.size());//list的长度
+            
+            
+            for(int i=0;i<list.size();i++) {
+            	resultStr+=list.get(i);
+//                System.out.println(cursor.next());
+            }
+            
+//            for(int i = 0; i < list.size(); i++){
+//            	resultStr+=list[i].toString();
+//            }
+                        
+        }catch(Exception e){
+        	System.out.println("DB error"); 
+        }
+        
+        return resultStr;
 	}
 
 }

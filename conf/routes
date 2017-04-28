@@ -14,6 +14,7 @@ GET     /users                                   Application.users
 GET     /devices                                   Application.devices
 GET     /api                                   Application.api
 GET     /dashboard                              Application.dashboard
+GET		/devicedata								Application.devicedata
 
 GET     /repo/info                              Application.repoInfo
 

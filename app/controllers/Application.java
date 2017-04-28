@@ -97,6 +97,9 @@ public class Application extends Controller {
 	public static void dashboard() {
 		render();
 	}
+	public static void devicedata() {
+		render();
+	}
 
 	// Repo information
 	public static void repoInfo() {
@@ -149,11 +152,11 @@ public class Application extends Controller {
 	public static void deviceDelete() {
 		SensorActAPI.deviceDelete.doProcess(request.params.get("body"));
 	}
-
+	//获取某一个设备信息
 	public static void deviceGet() {
 		SensorActAPI.deviceGet.doProcess(request.params.get("body"));
 	}
-
+	//获取所有设备信息
 	public static void deviceList() {
 		SensorActAPI.deviceList.doProcess(request.params.get("body"));
 	}
@@ -161,7 +164,7 @@ public class Application extends Controller {
 	public static void deviceShare() {
 		SensorActAPI.deviceShare.doProcess(request.params.get("body"));
 	}
-
+	//搜索所有匹配设备，该功能原工程没有完善
 	public static void deviceSearch() {
 		SensorActAPI.deviceSearch.doProcess(request.params.get("body"));
 	}

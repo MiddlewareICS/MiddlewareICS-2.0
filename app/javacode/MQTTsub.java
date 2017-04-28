@@ -1,6 +1,8 @@
 //mqtt
 package javacode;
 
+import java.util.List;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;  
@@ -122,9 +124,7 @@ import com.mongodb.util.JSON;
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
 		        }
-		        
-		        
-		        
+
 		    }   
 	    } 
 	    
