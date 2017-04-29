@@ -75,7 +75,7 @@ public class ResponseFormat extends SensorActAPI {
 	 *            Status of the success message
 	 */
 	public void SendSuccess(final String apiname, final String message) {
-		log.info(apiname + Const.DELIM1 + message);
+//		log.info(apiname + Const.DELIM1 + message);
 		sendJSON(new ResponseFormat(apiname, Const.SUCCESS, message));
 	}
 

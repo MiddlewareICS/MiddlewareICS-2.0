@@ -113,7 +113,8 @@ import com.mongodb.util.JSON;
 		        }
 		        
 		        //mongodb
-		        try{	        	
+		        try{	
+		        	System.out.println("\nSAVE sub content ");
 		        	Mongo mongo = new Mongo("127.0.0.1",27017);  
 		            DB db =mongo.getDB("study"); 
 		            DBCollection collection = db.getCollection(TOPIC);

@@ -10,11 +10,12 @@ POST    /                                       Application.index
 
 #hewei test
 GET     /home                                   Application.home
-GET     /users                                   Application.users
-GET     /devices                                   Application.devices
-GET     /api                                   Application.api
+GET     /users                                  Application.users
+GET     /devices                                Application.devices
+GET     /api                                    Application.api
 GET     /dashboard                              Application.dashboard
 GET		/devicedata								Application.devicedata
+GET		/deviceproperty							Application.deviceproperty
 
 GET     /repo/info                              Application.repoInfo
 

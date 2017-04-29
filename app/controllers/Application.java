@@ -100,6 +100,9 @@ public class Application extends Controller {
 	public static void devicedata() {
 		render();
 	}
+	public static void deviceproperty() {
+		render();
+	}
 
 	// Repo information
 	public static void repoInfo() {

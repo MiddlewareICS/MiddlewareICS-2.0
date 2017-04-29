@@ -8,7 +8,7 @@
 	<meta name="description" content="Xenon Boostrap Admin Panel" />
 	<meta name="author" content="" />
 	
-	<title>Home</title>
+	<title>Data</title>
 
 	<!--<link rel="stylesheet" href="http://fonts.useso.com/css?family=Arimo:400,700,400italic">-->
 	<link rel="stylesheet" href="public/assets/css/fonts/linecons/css/linecons.css">
@@ -98,7 +98,7 @@
 						</a>
 					</li>
 					<li class="deviceinfo">
-						<a href="http://localhost:9000/deviceinfo">
+						<a href="http://localhost:9000/deviceproperty">
 							<span class="title">设备性能</span>
 						</a>
 					</li>
@@ -551,16 +551,14 @@
 
 
 					// Realtime Network Stats
-					var i = 0,
-						rns_values = [130,150],
-						rns2_values = [39,50],
-						realtime_network_stats = [];
-					
-					for(i=0; i<=100; i++)
-					{
-						realtime_network_stats.push({ id: i, x1: between(rns_values[0], rns_values[1]), x2: between(rns2_values[0], rns2_values[1])});
-					}
-					
+					getTem("temperature");
+					setInterval(function(){  temperatureRealtime("temperature"); }, 5000);
+	
+				});
+
+				function paintRealtime(realtime_network_stats){
+
+					var i = 0;
 					$("#realtime-network-stats").dxChart({
 						dataSource: realtime_network_stats,
 						commonSeriesSettings: {
@@ -568,8 +566,7 @@
 							argumentField: "id"
 						},
 						series: [
-							{ valueField: "x1", name: "Packets Sent", color: '#7c38bc', opacity: .4 },
-							{ valueField: "x2", name: "Packets Received", color: '#000', opacity: .5},
+							{ valueField: "x1", name: "Packets Sent", color: '#7c38bc', opacity: .4 }
 						],
 						legend: {
 							verticalAlignment: "bottom",
@@ -591,41 +588,87 @@
 					        valueMarginsEnabled: false
 					    },
 						valueAxis: {
-							max: 500
+							max: 50
 						},
 						animation: {
 							enabled: false
 						}
 					}).data('iCount', i);
-					
 
-					
-					setInterval(function(){  networkRealtimeChartTick(rns_values, rns2_values); }, 1000);
-	
-				});
-
-				function networkRealtimeChartTick(min_max, min_max2)
-				{
-					var $ = jQuery,
-						i = 0;
-					
-					var chart_data = $('#realtime-network-stats').dxChart('instance').option('dataSource');
-					
-					var count = $('#realtime-network-stats').data('iCount');
-					
-					$('#realtime-network-stats').data('iCount', count + 1);
-					
-					chart_data.shift();
-					chart_data.push({id: count + 1, x1: between(min_max[0],min_max[1]), x2: between(min_max2[0],min_max2[1])});
-					
-					$('#realtime-network-stats').dxChart('instance').option('dataSource', chart_data);
 				}
-								
-				function between(randNumMin, randNumMax)
+
+				function temperatureRealtime(prop)
 				{
-					var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
+					var $ = jQuery;
 					
-					return randInt;
+					var resultArr = [];
+					var deviceGet={
+						"secretkey": sessionStorage.getItem('secretKey'), 
+						"target": "Environment"		
+					}
+					
+					var deviceStr=JSON.stringify(deviceGet);
+					$.post("http://localhost:9000/device/search",
+						deviceStr,
+						function(data,status){
+							if(data.statuscode && data.statuscode!==0){
+								alert('搜索失败:'+data.message);							
+							}
+							else{
+								
+								$(".temperature").html(data.message);
+							}
+							console.log(data);	
+
+							var contentJson = JSON.parse(data.message);
+							for(var i =0; i<contentJson.length;i++){
+								resultArr.push({ id: i, x1: contentJson[i][prop]})
+								console.log(contentJson[i][prop]);
+							}	
+							chart_data=resultArr;
+							$('#realtime-network-stats').dxChart('instance').option('dataSource', chart_data);
+					});
+				}
+
+				// function between(randNumMin, randNumMax)
+				// {
+				// 	var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
+					
+				// 	return randInt;
+				// }
+
+
+
+
+				function getTem(prop){
+
+					var resultArr = [];
+					var deviceGet={
+						"secretkey": sessionStorage.getItem('secretKey'), 
+						"target": "Environment"		
+					}
+					
+					var deviceStr=JSON.stringify(deviceGet);
+					$.post("http://localhost:9000/device/search",
+						deviceStr,
+						function(data,status){
+							if(data.statuscode && data.statuscode!==0){
+								alert('搜索失败:'+data.message);							
+							}
+							else{
+								
+								$(".temperature").html(data.message);
+							}
+							console.log(data);	
+
+							var contentJson = JSON.parse(data.message);
+							for(var i =0; i<contentJson.length;i++){
+								resultArr.push({ id: i, x1: contentJson[i][prop]})
+								console.log(contentJson[i][prop]);
+							}	
+							paintRealtime(resultArr);		
+					});
+					// return resultArr;
 				}
 			</script>
 
@@ -655,9 +698,11 @@
 				</div>
 
 			</div>
-			
+		<!-- <button onclick="getTem()">获得温度</button>
+		<div class="temperature"></div>	 -->
 
 		</div>
+		
 		
 		<!--聊天-->
 		<!-- start: Chat Section -->

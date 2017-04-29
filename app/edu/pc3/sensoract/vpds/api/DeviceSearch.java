@@ -122,13 +122,20 @@ public class DeviceSearch extends SensorActAPI {
             DBCollection collection = db.getCollection(target);
             DBCursor cursor = collection.find();
             List<DBObject> list = cursor.toArray();
+            
             System.out.println(list.size());//list的长度
             
             
-            for(int i=0;i<list.size();i++) {
-            	resultStr+=list.get(i);
+            for(int i=list.size()-1;i>0&&i>list.size()-1-100;i--) {
+//            	System.out.println(list.get(i).toString());
+            	if(resultStr=="")
+            		resultStr=list.get(i).toString();
+            	else
+            		resultStr=list.get(i).toString()+","+resultStr;
+            	
 //                System.out.println(cursor.next());
             }
+            resultStr="["+resultStr+"]";
             
 //            for(int i = 0; i < list.size(); i++){
 //            	resultStr+=list[i].toString();
