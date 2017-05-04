@@ -480,58 +480,8 @@
 						{ time: new Date("October 02, 2014 23:00:00"), reqs: 12 },
 						{ time: new Date("October 03, 2014 00:00:00"), reqs: 88 },
 					];
-					var cpu_usage_data = [
-						{ time: new Date("October 02, 2014 01:00:00"), usage: 75 },
-						{ time: new Date("October 02, 2014 02:00:00"), usage: 55 },
-						{ time: new Date("October 02, 2014 03:00:00"), usage: 49 },
-						{ time: new Date("October 02, 2014 04:00:00"), usage: 87 },
-						{ time: new Date("October 02, 2014 05:00:00"), usage: 8 },
-						{ time: new Date("October 02, 2014 06:00:00"), usage: 20 },
-						{ time: new Date("October 02, 2014 07:00:00"), usage: 39 },
-						{ time: new Date("October 02, 2014 08:00:00"), usage: 26 },
-						{ time: new Date("October 02, 2014 09:00:00"), usage: 87 },
-						{ time: new Date("October 02, 2014 10:00:00"), usage: 69 },
-						{ time: new Date("October 02, 2014 11:00:00"), usage: 40 },
-						{ time: new Date("October 02, 2014 12:00:00"), usage: 57 },
-						{ time: new Date("October 02, 2014 13:00:00"), usage: 48 },
-						{ time: new Date("October 02, 2014 14:00:00"), usage: 73 },
-						{ time: new Date("October 02, 2014 15:00:00"), usage: 28 },
-						{ time: new Date("October 02, 2014 16:00:00"), usage: 5 },
-						{ time: new Date("October 02, 2014 17:00:00"), usage: 73 },
-						{ time: new Date("October 02, 2014 18:00:00"), usage: 27 },
-						{ time: new Date("October 02, 2014 19:00:00"), usage: 63 },
-						{ time: new Date("October 02, 2014 20:00:00"), usage: 5 },
-						{ time: new Date("October 02, 2014 21:00:00"), usage: 100 },
-						{ time: new Date("October 02, 2014 22:00:00"), usage: 61 },
-						{ time: new Date("October 02, 2014 23:00:00"), usage: 39 },
-						{ time: new Date("October 03, 2014 00:00:00"), usage: 59 },
-					];
-					var memory_usage_data = [
-						{ time: new Date("October 02, 2014 01:00:00"), used: 559 },
-						{ time: new Date("October 02, 2014 02:00:00"), used: 692 },
-						{ time: new Date("October 02, 2014 03:00:00"), used: 534 },
-						{ time: new Date("October 02, 2014 04:00:00"), used: 607 },
-						{ time: new Date("October 02, 2014 05:00:00"), used: 50 },
-						{ time: new Date("October 02, 2014 06:00:00"), used: 772 },
-						{ time: new Date("October 02, 2014 07:00:00"), used: 30 },
-						{ time: new Date("October 02, 2014 08:00:00"), used: 108 },
-						{ time: new Date("October 02, 2014 09:00:00"), used: 440 },
-						{ time: new Date("October 02, 2014 10:00:00"), used: 371 },
-						{ time: new Date("October 02, 2014 11:00:00"), used: 209 },
-						{ time: new Date("October 02, 2014 12:00:00"), used: 378 },
-						{ time: new Date("October 02, 2014 13:00:00"), used: 308 },
-						{ time: new Date("October 02, 2014 14:00:00"), used: 585 },
-						{ time: new Date("October 02, 2014 15:00:00"), used: 96 },
-						{ time: new Date("October 02, 2014 16:00:00"), used: 473 },
-						{ time: new Date("October 02, 2014 17:00:00"), used: 864 },
-						{ time: new Date("October 02, 2014 18:00:00"), used: 895 },
-						{ time: new Date("October 02, 2014 19:00:00"), used: 610 },
-						{ time: new Date("October 02, 2014 20:00:00"), used: 893 },
-						{ time: new Date("October 02, 2014 21:00:00"), used: 753 },
-						{ time: new Date("October 02, 2014 22:00:00"), used: 209 },
-						{ time: new Date("October 02, 2014 23:00:00"), used: 555 },
-						{ time: new Date("October 03, 2014 00:00:00"), used: 144 },
-					];
+					
+					
 					
 					
 											
@@ -617,8 +567,37 @@
 							visible: false
 						}
 					});
-										
-						
+
+									
+
+
+					//CPU data
+					var cpu_usage_data = [
+						{ time: new Date("October 02, 2014 01:00:00"), usage: 75 },
+						{ time: new Date("October 02, 2014 02:00:00"), usage: 55 },
+						{ time: new Date("October 02, 2014 03:00:00"), usage: 49 },
+						{ time: new Date("October 02, 2014 04:00:00"), usage: 87 },
+						{ time: new Date("October 02, 2014 05:00:00"), usage: 8 },
+						{ time: new Date("October 02, 2014 06:00:00"), usage: 20 },
+						{ time: new Date("October 02, 2014 07:00:00"), usage: 39 },
+						{ time: new Date("October 02, 2014 08:00:00"), usage: 26 },
+						{ time: new Date("October 02, 2014 09:00:00"), usage: 87 },
+						{ time: new Date("October 02, 2014 10:00:00"), usage: 69 },
+						{ time: new Date("October 02, 2014 11:00:00"), usage: 40 },
+						{ time: new Date("October 02, 2014 12:00:00"), usage: 57 },
+						{ time: new Date("October 02, 2014 13:00:00"), usage: 48 },
+						{ time: new Date("October 02, 2014 14:00:00"), usage: 73 },
+						{ time: new Date("October 02, 2014 15:00:00"), usage: 28 },
+						{ time: new Date("October 02, 2014 16:00:00"), usage: 5 },
+						{ time: new Date("October 02, 2014 17:00:00"), usage: 73 },
+						{ time: new Date("October 02, 2014 18:00:00"), usage: 27 },
+						{ time: new Date("October 02, 2014 19:00:00"), usage: 63 },
+						{ time: new Date("October 02, 2014 20:00:00"), usage: 5 },
+						{ time: new Date("October 02, 2014 21:00:00"), usage: 100 },
+						{ time: new Date("October 02, 2014 22:00:00"), usage: 61 },
+						{ time: new Date("October 02, 2014 23:00:00"), usage: 39 },
+						{ time: new Date("October 03, 2014 00:00:00"), usage: 59 },
+					];	
 					// CPU Usage
 					$('#cpu-usage').dxCircularGauge({
 						scale: {
@@ -705,6 +684,35 @@
 					
 					setInterval(function(){  updateCPURealtime(); }, 5000);
 						
+
+
+					//memory data
+					var memory_usage_data = [
+						{ time: new Date("October 02, 2014 01:00:00"), used: 559 },
+						{ time: new Date("October 02, 2014 02:00:00"), used: 692 },
+						{ time: new Date("October 02, 2014 03:00:00"), used: 534 },
+						{ time: new Date("October 02, 2014 04:00:00"), used: 607 },
+						{ time: new Date("October 02, 2014 05:00:00"), used: 50 },
+						{ time: new Date("October 02, 2014 06:00:00"), used: 772 },
+						{ time: new Date("October 02, 2014 07:00:00"), used: 30 },
+						{ time: new Date("October 02, 2014 08:00:00"), used: 108 },
+						{ time: new Date("October 02, 2014 09:00:00"), used: 440 },
+						{ time: new Date("October 02, 2014 10:00:00"), used: 371 },
+						{ time: new Date("October 02, 2014 11:00:00"), used: 209 },
+						{ time: new Date("October 02, 2014 12:00:00"), used: 378 },
+						{ time: new Date("October 02, 2014 13:00:00"), used: 308 },
+						{ time: new Date("October 02, 2014 14:00:00"), used: 585 },
+						{ time: new Date("October 02, 2014 15:00:00"), used: 96 },
+						{ time: new Date("October 02, 2014 16:00:00"), used: 473 },
+						{ time: new Date("October 02, 2014 17:00:00"), used: 864 },
+						{ time: new Date("October 02, 2014 18:00:00"), used: 895 },
+						{ time: new Date("October 02, 2014 19:00:00"), used: 610 },
+						{ time: new Date("October 02, 2014 20:00:00"), used: 893 },
+						{ time: new Date("October 02, 2014 21:00:00"), used: 753 },
+						{ time: new Date("October 02, 2014 22:00:00"), used: 209 },
+						{ time: new Date("October 02, 2014 23:00:00"), used: 555 },
+						{ time: new Date("October 03, 2014 00:00:00"), used: 144 },
+					];
 					// Memory Usage
 					$('#memory-usage').dxCircularGauge({
 						scale: {
@@ -780,13 +788,15 @@
 							label: {
 								customizeText: function (arg) {
 									return date('h:i A', arg.value);
-								}
+								},
+								visible:false
 							},
 						},
 						legend: {
 							visible: false
 						}
 					});
+					setInterval(function(){  updateMemoryRealtime(); }, 5000);
 					
 					
 					// Combine charts for filtering, grouped by time
@@ -868,7 +878,8 @@
 						$("#memory-usage").data("dxCircularGauge").render();
 					});
 				});
-
+				
+				// CPU realtime data
 				function updateCPURealtime() {
 					var chartData = $('#cpu-usage-chart').dxChart('instance').option('dataSource');
 					for(var i = 0; i < chartData.length-1; i++){
@@ -876,7 +887,21 @@
 					}
 					chartData[chartData.length-1].usage=parseInt(Math.random()*100) ;
 					$('#cpu-usage-chart').dxChart('instance').option('dataSource', chartData);
-					console.log(chartData)
+					// console.log(chartData);
+					$('#cpu-usage').dxCircularGauge('instance').option('value', chartData[chartData.length-1].usage);
+					$('#now-CPU').html(chartData[chartData.length-1].usage);
+				}
+				// memory realtime data
+				function updateMemoryRealtime() {
+					var chartData = $('#memory-usage-chart').dxChart('instance').option('dataSource');
+					for(var i = 0; i < chartData.length-1; i++){
+						chartData[i].used=chartData[i+1].used;
+					}
+					chartData[chartData.length-1].used=parseInt(Math.random()*900) ;
+					$('#memory-usage-chart').dxChart('instance').option('dataSource', chartData);
+					console.log(chartData);
+					$('#memory-usage').dxCircularGauge('instance').option('value', chartData[chartData.length-1].used);
+					$('#now-memory').html(chartData[chartData.length-1].used);
 				}
 			</script>
 			
@@ -891,7 +916,7 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<p class="text-medium">View how much CPU is being used at the moment .</p>
-							<div class="super-large text-purple" data-count="this" data-from="0" data-to="16" data-duration="2">0</div>
+							<div id="now-CPU" class="super-large text-purple" data-count="this" data-from="0" data-to="16" data-duration="2">0</div>
 						</div>
 						<div class="col-sm-3">
 							<div id="cpu-usage" style="height: 150px;"></div>
@@ -904,27 +929,27 @@
 				</div>
 			</div>
 
-			<!-- <div class="panel panel-default">
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					CPU usage in %
+					Memory Consumption, Mb
 				</div>
 				<div class="panel-body">
 					
 					<div class="row">
 						<div class="col-sm-3">
-							<p class="text-medium">View how much CPU is being used at the moment and for the selected range within the last day.</p>
-							<div class="super-large text-purple" data-count="this" data-from="0" data-to="16" data-duration="2">0</div>
+							<p class="text-medium">View how much memory is used at the moment and for the selected range within the last day.</p>
+							<div id = "now-memory"  class="super-large text-info" data-count="this" data-from="0" data-to="315" data-duration="3">0</div>
 						</div>
 						<div class="col-sm-3">
-							<div id="cpu-usage" style="height: 150px;"></div>
+							<div id="memory-usage" style="height: 150px;"></div>
 						</div>
 						<div class="col-sm-6">
-							<div id="cpu-usage-chart" style="height: 150px;"></div>
+							<div id="memory-usage-chart" style="height: 150px;"></div>
 						</div>
 					</div>
 					
 				</div>
-			</div> -->
+			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -963,27 +988,7 @@
 				</div>
 			</div>
 						
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Memory Consumption, Mb
-				</div>
-				<div class="panel-body">
-					
-					<div class="row">
-						<div class="col-sm-3">
-							<p class="text-medium">View how much memory is used at the moment and for the selected range within the last day.</p>
-							<div class="super-large text-info" data-count="this" data-from="0" data-to="315" data-duration="3">0</div>
-						</div>
-						<div class="col-sm-3">
-							<div id="memory-usage" style="height: 150px;"></div>
-						</div>
-						<div class="col-sm-6">
-							<div id="memory-usage-chart" style="height: 150px;"></div>
-						</div>
-					</div>
-					
-				</div>
-			</div>
+			
 			<!-- Main Footer -->
 			<!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
 			<!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
