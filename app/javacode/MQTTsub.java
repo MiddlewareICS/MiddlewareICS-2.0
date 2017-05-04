@@ -122,6 +122,9 @@ import com.mongodb.util.JSON;
 		            DBObject dbObject =(DBObject)JSON.parse(jsonContent);
 		            collection.insert(dbObject);
 		            
+		            mongo.close();
+		            mongo=null;//一定要写这句话，不然系统不会回收，只是关闭了，连接存在。
+		            
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
 		        }

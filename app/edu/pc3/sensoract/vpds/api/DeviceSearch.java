@@ -140,7 +140,9 @@ public class DeviceSearch extends SensorActAPI {
 //            for(int i = 0; i < list.size(); i++){
 //            	resultStr+=list[i].toString();
 //            }
-                        
+                  
+            mongo.close();
+            mongo=null;//一定要写这句话，不然系统不会回收，只是关闭了，连接存在。
         }catch(Exception e){
         	System.out.println("DB error"); 
         }

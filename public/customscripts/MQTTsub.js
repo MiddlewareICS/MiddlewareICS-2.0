@@ -6,15 +6,15 @@
  
  System.out.println("### Here is MQTTsub.js ### \n");
 
- 
+ var hostname = "tcp://127.0.0.1:1883"
  // sub
- client = new MQTTsub("tcp://192.168.199.170:1883","ICS","subDevice1");  
+ client = new MQTTsub(hostname,"ICS","subDevice1");  
  client.start();
  
- client2 = new MQTTsub("tcp://192.168.199.170:1883","Environment","subDevice2");  
+ client2 = new MQTTsub(hostname,"Environment","subDevice2");  
  client2.start();
  
- client3 = new MQTTsub("tcp://192.168.199.170:1883","RaspberryPiInfo","subDevice3");  
+ client3 = new MQTTsub(hostname,"RaspberryPiInfo","subDevice3");  
  client3.start();
 
  

@@ -33,6 +33,7 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 
 
 import com.mongodb.*;
+import com.mongodb.util.JSON;
 
 import javacode.*;
 
@@ -66,7 +67,8 @@ import org.mozilla.javascript.Scriptable;
 import org.quartz.SchedulerException;
 import javacode.Schedule;
 
-
+//import com.mongodb.*;
+//import com.mongodb.util.JSON;
 
 /**
  * @author hewei
@@ -83,6 +85,7 @@ public class Bootstrap extends Job {
 	private String uploadKey = null;
 	private String actuationKey = null;
 
+	
 	public void getOwnerConfiguration() {
 		ownerName = Play.configuration.getProperty(Const.OWNER_NAME);
 		ownerPassword = Play.configuration.getProperty(Const.OWNER_PASSWORD);
@@ -213,9 +216,7 @@ public class Bootstrap extends Job {
 		verifyOwnerKeys();
 		addOwnerProfile();
 		
-		
-		
-		
+
 		
 		
 		
