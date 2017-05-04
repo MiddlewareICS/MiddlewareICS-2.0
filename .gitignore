@@ -10,3 +10,5 @@ precompiled/
 eclipse/
 
 .lck
+textclient.txt
+textclientdebug.log
