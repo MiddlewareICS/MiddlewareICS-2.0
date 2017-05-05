@@ -127,19 +127,13 @@ public class DeviceSearch extends SensorActAPI {
             
             
             for(int i=list.size()-1;i>0&&i>list.size()-1-100;i--) {
-//            	System.out.println(list.get(i).toString());
             	if(resultStr=="")
             		resultStr=list.get(i).toString();
             	else
             		resultStr=list.get(i).toString()+","+resultStr;
-            	
-//                System.out.println(cursor.next());
             }
             resultStr="["+resultStr+"]";
-            
-//            for(int i = 0; i < list.size(); i++){
-//            	resultStr+=list[i].toString();
-//            }
+
                   
             mongo.close();
             mongo=null;//一定要写这句话，不然系统不会回收，只是关闭了，连接存在。

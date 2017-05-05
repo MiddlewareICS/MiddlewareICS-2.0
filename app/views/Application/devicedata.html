@@ -551,16 +551,20 @@
 
 
 					// Realtime Network Stats
-					getTem("temperature");
-					setInterval(function(){  temperatureRealtime("temperature"); }, 5000);
+					deviceSearch("Environment",paintRealtimeTemperature);
+					setInterval(function(){  deviceSearch("Environment",function(contentJson){
+						var resultArr=getTempeArr(contentJson);
+						$('#realtime-network-stats').dxChart('instance').option('dataSource', resultArr);
+					}); }, 5000);
 	
 				});
 
-				function paintRealtime(realtime_network_stats){
-
+				function paintRealtimeTemperature(contentJson){
+					var resultArr=getTempeArr(contentJson);
+					
 					var i = 0;
 					$("#realtime-network-stats").dxChart({
-						dataSource: realtime_network_stats,
+						dataSource: resultArr,
 						commonSeriesSettings: {
 							type: "area",
 							argumentField: "id"
@@ -596,15 +600,13 @@
 					}).data('iCount', i);
 
 				}
-
-				function temperatureRealtime(prop)
-				{
-					var $ = jQuery;
-					
+			
+				//通用型device/search的函数
+				function deviceSearch(targetCollection,func) {
 					var resultArr = [];
 					var deviceGet={
 						"secretkey": sessionStorage.getItem('secretKey'), 
-						"target": "Environment"		
+						"target": targetCollection		
 					}
 					
 					var deviceStr=JSON.stringify(deviceGet);
@@ -615,61 +617,25 @@
 								alert('搜索失败:'+data.message);							
 							}
 							else{
+								var contentJson = JSON.parse(data.message);
 								
-								$(".temperature").html(data.message);
+								//回调
+								func(contentJson);
 							}
-							console.log(data);	
-
-							var contentJson = JSON.parse(data.message);
-							for(var i =0; i<contentJson.length;i++){
-								resultArr.push({ id: i, x1: contentJson[i][prop]})
-								console.log(contentJson[i][prop]);
-							}	
-							chart_data=resultArr;
-							$('#realtime-network-stats').dxChart('instance').option('dataSource', chart_data);
+							console.log(data);										
 					});
 				}
-
-				// function between(randNumMin, randNumMax)
-				// {
-				// 	var randInt = Math.floor((Math.random() * ((randNumMax + 1) - randNumMin)) + randNumMin);
-					
-				// 	return randInt;
-				// }
-
-
-
-
-				function getTem(prop){
-
-					var resultArr = [];
-					var deviceGet={
-						"secretkey": sessionStorage.getItem('secretKey'), 
-						"target": "Environment"		
+				
+				//从内容数组提取温度,生成表格数据数组
+				function getTempeArr(contentJson){
+					var resultArr=[];
+					for(var i =0; i<contentJson.length;i++){
+						resultArr.push({ id: i, x1: contentJson[i]["temperature"]})
+						console.log(contentJson[i]["temperature"]);
 					}
-					
-					var deviceStr=JSON.stringify(deviceGet);
-					$.post("http://localhost:9000/device/search",
-						deviceStr,
-						function(data,status){
-							if(data.statuscode && data.statuscode!==0){
-								alert('搜索失败:'+data.message);							
-							}
-							else{
-								
-								$(".temperature").html(data.message);
-							}
-							console.log(data);	
-
-							var contentJson = JSON.parse(data.message);
-							for(var i =0; i<contentJson.length;i++){
-								resultArr.push({ id: i, x1: contentJson[i][prop]})
-								console.log(contentJson[i][prop]);
-							}	
-							paintRealtime(resultArr);		
-					});
-					// return resultArr;
+					return resultArr;
 				}
+				
 			</script>
 
 			<div class="row">
