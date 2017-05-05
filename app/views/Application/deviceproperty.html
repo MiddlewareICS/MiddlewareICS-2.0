@@ -524,7 +524,6 @@
 							spindleSize: 12
 						}
 					});
-					
 					// Requests per second chart
 					$("#reqs-per-second-chart").dxChart({
 						dataSource: reqs_per_second_data,
@@ -610,8 +609,7 @@
 							color: '#2c2e2f',
 							spindleSize: 12
 						}
-					});
-					
+					});					
 					// CPU Usage chart
 					deviceSearch("RaspberryPiInfo",paintRealtimeCPUUse);
 					//实时更新
@@ -623,6 +621,8 @@
 						$('#now-CPU').html(resultArr[resultArr.length-1].x1);
 					}); }, 5000);
 						
+
+
 
 
 					// Memory Usage
@@ -675,7 +675,10 @@
 						$('#now-memory').html(resultArr[resultArr.length-1].x1);
 					}); }, 5000);
 					
-					
+
+
+
+
 					// Resize charts
 					$(window).on('xenon.resize', function()
 					{
@@ -825,7 +828,7 @@
 			</script>
 			
 
-
+			<!--CPU Use-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					RealTime CPU usage in %
@@ -848,6 +851,7 @@
 				</div>
 			</div>
 
+			<!--Memory used-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Memory Consumption, Mb
@@ -870,6 +874,7 @@
 				</div>
 			</div>
 
+			<!--request-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Requests per second
