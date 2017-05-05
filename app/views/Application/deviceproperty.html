@@ -571,33 +571,7 @@
 									
 
 
-					//CPU data
-					var cpu_usage_data = [
-						{ time: new Date("October 02, 2014 01:00:00"), usage: 75 },
-						{ time: new Date("October 02, 2014 02:00:00"), usage: 55 },
-						{ time: new Date("October 02, 2014 03:00:00"), usage: 49 },
-						{ time: new Date("October 02, 2014 04:00:00"), usage: 87 },
-						{ time: new Date("October 02, 2014 05:00:00"), usage: 8 },
-						{ time: new Date("October 02, 2014 06:00:00"), usage: 20 },
-						{ time: new Date("October 02, 2014 07:00:00"), usage: 39 },
-						{ time: new Date("October 02, 2014 08:00:00"), usage: 26 },
-						{ time: new Date("October 02, 2014 09:00:00"), usage: 87 },
-						{ time: new Date("October 02, 2014 10:00:00"), usage: 69 },
-						{ time: new Date("October 02, 2014 11:00:00"), usage: 40 },
-						{ time: new Date("October 02, 2014 12:00:00"), usage: 57 },
-						{ time: new Date("October 02, 2014 13:00:00"), usage: 48 },
-						{ time: new Date("October 02, 2014 14:00:00"), usage: 73 },
-						{ time: new Date("October 02, 2014 15:00:00"), usage: 28 },
-						{ time: new Date("October 02, 2014 16:00:00"), usage: 5 },
-						{ time: new Date("October 02, 2014 17:00:00"), usage: 73 },
-						{ time: new Date("October 02, 2014 18:00:00"), usage: 27 },
-						{ time: new Date("October 02, 2014 19:00:00"), usage: 63 },
-						{ time: new Date("October 02, 2014 20:00:00"), usage: 5 },
-						{ time: new Date("October 02, 2014 21:00:00"), usage: 100 },
-						{ time: new Date("October 02, 2014 22:00:00"), usage: 61 },
-						{ time: new Date("October 02, 2014 23:00:00"), usage: 39 },
-						{ time: new Date("October 03, 2014 00:00:00"), usage: 59 },
-					];	
+					
 					// CPU Usage
 					$('#cpu-usage').dxCircularGauge({
 						scale: {
@@ -639,50 +613,15 @@
 					});
 					
 					// CPU Usage chart
-					$("#cpu-usage-chart").dxChart({
-						dataSource: cpu_usage_data,
-						commonPaneSettings: {
-							border: {
-								visible: true,
-								color: '#f5f5f5'
-							}
-						},
-						commonSeriesSettings: {
-							type: "area",
-							argumentField: "time",
-							border: {
-								color: '#7c38bc',
-								width: 1,
-								visible: true
-							}
-						},
-						series: [
-							{ valueField: "usage", name: "Capacity used", color: '#7c38bc', opacity: .5 },
-						],
-						commonAxisSettings: {
-							label: {
-								visible: true
-							},
-							grid: {
-								visible: true,
-								color: '#f5f5f5'
-							}
-						},
-						argumentAxis: {
-							valueMarginsEnabled: false,
-							label: {
-								customizeText: function (arg) {
-									return date('h:i A', arg.value);
-								},
-								visible:false
-							},
-						},
-						legend: {
-							visible: false
-						}
-					});
-					
-					setInterval(function(){  updateCPURealtime(); }, 5000);
+					deviceSearch("RaspberryPiInfo",paintRealtimeCPUUse);
+					//实时更新
+					setInterval(function(){  
+						deviceSearch("RaspberryPiInfo",function(contentJson){
+						var resultArr=getCPUUseArr(contentJson);
+						$('#cpu-usage-chart').dxChart('instance').option('dataSource', resultArr);
+						$('#cpu-usage').dxCircularGauge('instance').option('value', resultArr[resultArr.length-1].x1);
+						$('#now-CPU').html(resultArr[resultArr.length-1].x1);
+					}); }, 5000);
 						
 
 
@@ -724,21 +663,23 @@
 							color: '#2c2e2f',
 							spindleSize: 12
 						}
-					});
-					
+					});					
 					// Memory Usage chart
 					deviceSearch("RaspberryPiInfo",paintRealtimeRAMUsed);
+					//实时更新
 					setInterval(function(){  
 						deviceSearch("RaspberryPiInfo",function(contentJson){
 						var resultArr=getRAMUsedArr(contentJson);
 						$('#memory-usage-chart').dxChart('instance').option('dataSource', resultArr);
+						$('#memory-usage').dxCircularGauge('instance').option('value', resultArr[resultArr.length-1].x1);
+						$('#now-memory').html(resultArr[resultArr.length-1].x1);
 					}); }, 5000);
 					
 					
 					// Resize charts
 					$(window).on('xenon.resize', function()
 					{
-						$("#range-chart").data("dxRangeSelector").render();
+						// $("#range-chart").data("dxRangeSelector").render();
 						
 						$("#reqs-per-second-chart").data("dxChart").render();
 						$("#cpu-usage-chart").data("dxChart").render();
@@ -749,31 +690,7 @@
 						$("#memory-usage").data("dxCircularGauge").render();
 					});
 				});
-
-				// CPU realtime data
-				function updateCPURealtime() {
-					var chartData = $('#cpu-usage-chart').dxChart('instance').option('dataSource');
-					for(var i = 0; i < chartData.length-1; i++){
-						chartData[i].usage=chartData[i+1].usage;
-					}
-					chartData[chartData.length-1].usage=parseInt(Math.random()*100) ;
-					$('#cpu-usage-chart').dxChart('instance').option('dataSource', chartData);
-					// console.log(chartData);
-					$('#cpu-usage').dxCircularGauge('instance').option('value', chartData[chartData.length-1].usage);
-					$('#now-CPU').html(chartData[chartData.length-1].usage);
-				}
-				// memory realtime data
-				function updateMemoryRealtime() {
-					var chartData = $('#memory-usage-chart').dxChart('instance').option('dataSource');
-					for(var i = 0; i < chartData.length-1; i++){
-						chartData[i].used=chartData[i+1].used;
-					}
-					chartData[chartData.length-1].used=parseInt(Math.random()*900) ;
-					$('#memory-usage-chart').dxChart('instance').option('dataSource', chartData);
-					console.log(chartData);
-					$('#memory-usage').dxCircularGauge('instance').option('value', chartData[chartData.length-1].used);
-					$('#now-memory').html(chartData[chartData.length-1].used);
-				}
+	
 
 
 				//通用型device/search的函数
@@ -800,7 +717,7 @@
 							console.log(data);										
 					});
 				}
-
+				//paint chart
 				function paintRealtimeRAMUsed(contentJson) {
 
 					var RAMUsed = getRAMUsedArr(contentJson);
@@ -845,15 +762,66 @@
 						}
 					});
 				}
-				
+				function paintRealtimeCPUUse(contentJson){
+					var CPUUse = getCPUUseArr(contentJson);
+					$("#cpu-usage-chart").dxChart({
+						dataSource: CPUUse,
+						commonPaneSettings: {
+							border: {
+								visible: true,
+								color: '#f5f5f5'
+							}
+						},
+						commonSeriesSettings: {
+							type: "area",
+							argumentField: "id",
+							border: {
+								color: '#7c38bc',
+								width: 1,
+								visible: true
+							}
+						},
+						series: [
+							{ valueField: "x1", name: "Capacity used", color: '#7c38bc', opacity: .5 },
+						],
+						commonAxisSettings: {
+							label: {
+								visible: true
+							},
+							grid: {
+								visible: true,
+								color: '#f5f5f5'
+							}
+						},
+						argumentAxis: {
+							valueMarginsEnabled: false,
+							label: {
+								visible:false
+							}
+						},
+						legend: {
+							visible: false
+						}
+					});
+				}
+				//get arr
 				function getRAMUsedArr(contentJson){
 					var resultArr=[];
 					for(var i =0; i<contentJson.length;i++){
 						resultArr.push({ id: i, x1: parseInt(contentJson[i]["RAMUsed"])})
-						console.log(contentJson[i]["RAMUsed"]);
+						// console.log(contentJson[i]["RAMUsed"]);
 					}
 					return resultArr;
 				}
+				function getCPUUseArr(contentJson){
+					var resultArr=[];
+					for(var i =0; i<contentJson.length;i++){
+						resultArr.push({ id: i, x1: parseInt(contentJson[i]["CPUUse"])})
+						// console.log(contentJson[i]["CPUUse"]);
+					}
+					return resultArr;
+				}
+
 			</script>
 			
 
@@ -902,21 +870,6 @@
 				</div>
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Realtime result filtering by range
-				</div>
-				<div class="panel-body">
-					
-					<div class="row">
-						<div class="col-sm-12">
-							<div id="range-chart"></div>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Requests per second
