@@ -90,6 +90,7 @@ import com.mongodb.util.JSON;
 		        System.out.println("\n-- Server Sub : " + topic + new String(message.getPayload()));
 		        
 		        
+		        
 		        //Esper
 		        if(TOPIC == "Temperature"){
 		        	Temperature temperature1 = new Temperature();  
@@ -119,6 +120,7 @@ import com.mongodb.util.JSON;
 		            DB db =mongo.getDB("study"); 
 		            DBCollection collection = db.getCollection(TOPIC);
 		            String jsonContent = new String(message.getPayload());
+		            System.out.println(jsonContent);
 		            DBObject dbObject =(DBObject)JSON.parse(jsonContent);
 		            collection.insert(dbObject);
 		            
