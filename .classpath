@@ -123,5 +123,6 @@
 	<classpathentry kind="lib" path="lib/JainSipApi1.2.jar"/>
 	<classpathentry kind="lib" path="lib/JainSipRi1.2.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="output" path="eclipse/classes"/>
 </classpath>

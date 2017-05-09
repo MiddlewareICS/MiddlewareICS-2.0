@@ -3,6 +3,7 @@ package javacode;
 
 import java.util.List;
 
+import org.bson.BSONObject;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;  
@@ -121,11 +122,21 @@ import com.mongodb.util.JSON;
 		            DBCollection collection = db.getCollection(TOPIC);
 		            String jsonContent = new String(message.getPayload());
 		            System.out.println(jsonContent);
+
+		           	            
+		            //insert mongodb
 		            DBObject dbObject =(DBObject)JSON.parse(jsonContent);
-		            collection.insert(dbObject);
-		            
+		            collection.insert(dbObject);		            
 		            mongo.close();
 		            mongo=null;//一定要写这句话，不然系统不会回收，只是关闭了，连接存在。
+		            
+		            
+		            //insert mySQL
+		            BSONObject obj = (BSONObject) JSON.parse(jsonContent);
+		            int tem = (int) obj.get("temperature");
+		            int hum = (int) obj.get("humidity");
+		            MySQL mySQL = new MySQL(tem,hum);
+		            mySQL.doSQL();
 		            
 		        }catch(Exception e){
 		        	System.out.println("DB error"); 
